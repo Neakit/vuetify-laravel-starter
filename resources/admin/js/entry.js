@@ -42,10 +42,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import Vue       from "vue";
 import VueRouter from "vue-router";
+import Vuetify   from "vuetify";
 
+Vue.use(Vuetify);
 Vue.use(VueRouter)
 
 import LoginPage from './pages/LoginPage';
+import Dashboard from './pages/Dashboard';
+
 import App from './App';
 
 const router = new VueRouter({
@@ -56,11 +60,17 @@ const router = new VueRouter({
             name: 'admin-login',
             component: LoginPage
         },
+        {
+            path: '/admin/dashboard',
+            name: 'admin-dashboard',
+            component: Dashboard
+        }
     ],
 });
 
 new Vue({
     el: '#app',
     components: { App },
+    vuetify: new Vuetify(),
     router
 });

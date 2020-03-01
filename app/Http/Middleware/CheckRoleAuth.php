@@ -18,7 +18,7 @@ class CheckRoleAuth
     {
         $user = Auth::user();
 
-        if($request->is('admin/login')) {
+        if($request->is('admin/dashboard')) {
             if ((empty($user) || $user->role !== 100) && !($request->ajax())) {
                 return $next($request);
             } else {
