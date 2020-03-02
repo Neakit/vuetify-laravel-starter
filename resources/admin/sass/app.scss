@@ -1,11 +1,8 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+$font-size-root: 28px;
+$btn-border-radius: 0px;
 
-// Variables
-@import 'variables';
+@import '~vuetify/src/styles/styles.sass';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+$material-light: map-merge($material-light, ( cards: lightgrey ));
 
-// Vuetify
-@import '~vuetify/dist/vuetify.min.css';
+$alert-border-radius: 16px;
