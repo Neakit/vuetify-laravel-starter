@@ -52,6 +52,7 @@ import Dashboard from './pages/Dashboard';
 
 import App from './App';
 
+
 const router = new VueRouter({
     mode: 'history',
     routes: [
@@ -68,9 +69,10 @@ const router = new VueRouter({
     ],
 });
 
+
 new Vue({
     el: '#app',
-    components: { App },
     vuetify: new Vuetify(),
+    render: (h) => h(App),
     router
 });

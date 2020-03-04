@@ -1,8 +1,13 @@
-$font-size-root: 28px;
-$btn-border-radius: 0px;
-
 @import '~vuetify/src/styles/styles.sass';
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
 
-$material-light: map-merge($material-light, ( cards: lightgrey ));
+button {
+    border: 0 !important;
+}
 
-$alert-border-radius: 16px;
+body {
+    margin: 0px !important;
+}

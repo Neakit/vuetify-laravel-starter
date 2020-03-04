@@ -1914,8 +1914,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'app'
+  name: 'app',
+  props: {
+    source: String
+  },
+  data: function data() {
+    return {
+      drawer: null,
+      // TODO: parse from router
+      routes: [{
+        title: 'Продукты',
+        path: '/admin/products'
+      }, {
+        title: 'Модели',
+        path: '/admin/models'
+      }, {
+        title: 'Категории',
+        path: '/admin/categories'
+      }]
+    };
+  },
+  created: function created() {
+    this.$vuetify.theme.dark = true;
+  }
 });
 
 /***/ }),
@@ -37290,7 +37345,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("router-view")], 1)
+  return _c(
+    "v-app",
+    { attrs: { id: "inspire" } },
+    [
+      _c(
+        "v-navigation-drawer",
+        {
+          attrs: { app: "", clipped: "" },
+          model: {
+            value: _vm.drawer,
+            callback: function($$v) {
+              _vm.drawer = $$v
+            },
+            expression: "drawer"
+          }
+        },
+        [
+          _c(
+            "v-list",
+            { attrs: { dense: "" } },
+            _vm._l(_vm.routes, function(route, index) {
+              return _c(
+                "v-list-item",
+                { key: index, attrs: { link: "" } },
+                [
+                  _c(
+                    "v-list-item-action",
+                    [_c("v-icon", [_vm._v("mdi-view-dashboard")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v(_vm._s(route.title))])],
+                    1
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-app-bar",
+        { attrs: { app: "", "clipped-left": "" } },
+        [
+          _c("v-app-bar-nav-icon", {
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                _vm.drawer = !_vm.drawer
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("v-toolbar-title", [_vm._v("Application")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-content", [_c("router-view")], 1),
+      _vm._v(" "),
+      _c("v-footer", { attrs: { app: "" } }, [_c("span", [_vm._v("© 2019")])])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -94029,6 +94153,428 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vuetify/lib/components/VAppBar/VAppBar.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VAppBar/VAppBar.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_components_VAppBar_VAppBar_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VAppBar/VAppBar.sass */ "./node_modules/vuetify/src/components/VAppBar/VAppBar.sass");
+/* harmony import */ var _src_components_VAppBar_VAppBar_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VAppBar_VAppBar_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _VToolbar_VToolbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../VToolbar/VToolbar */ "./node_modules/vuetify/lib/components/VToolbar/VToolbar.js");
+/* harmony import */ var _directives_scroll__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../directives/scroll */ "./node_modules/vuetify/lib/directives/scroll/index.js");
+/* harmony import */ var _mixins_applicationable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/applicationable */ "./node_modules/vuetify/lib/mixins/applicationable/index.js");
+/* harmony import */ var _mixins_scrollable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../mixins/scrollable */ "./node_modules/vuetify/lib/mixins/scrollable/index.js");
+/* harmony import */ var _mixins_ssr_bootable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../mixins/ssr-bootable */ "./node_modules/vuetify/lib/mixins/ssr-bootable/index.js");
+/* harmony import */ var _mixins_toggleable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../mixins/toggleable */ "./node_modules/vuetify/lib/mixins/toggleable/index.js");
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../util/helpers */ "./node_modules/vuetify/lib/util/helpers.js");
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../util/mixins */ "./node_modules/vuetify/lib/util/mixins.js");
+// Styles
+ // Extensions
+
+ // Directives
+
+ // Mixins
+
+
+
+
+ // Utilities
+
+
+
+const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_8__["default"])(_VToolbar_VToolbar__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_scrollable__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_ssr_bootable__WEBPACK_IMPORTED_MODULE_5__["default"], _mixins_toggleable__WEBPACK_IMPORTED_MODULE_6__["default"], Object(_mixins_applicationable__WEBPACK_IMPORTED_MODULE_3__["default"])('top', ['clippedLeft', 'clippedRight', 'computedHeight', 'invertedScroll', 'isExtended', 'isProminent', 'value']));
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (baseMixins.extend({
+  name: 'v-app-bar',
+  directives: {
+    Scroll: _directives_scroll__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  props: {
+    clippedLeft: Boolean,
+    clippedRight: Boolean,
+    collapseOnScroll: Boolean,
+    elevateOnScroll: Boolean,
+    fadeImgOnScroll: Boolean,
+    hideOnScroll: Boolean,
+    invertedScroll: Boolean,
+    scrollOffScreen: Boolean,
+    shrinkOnScroll: Boolean,
+    value: {
+      type: Boolean,
+      default: true
+    }
+  },
+
+  data() {
+    return {
+      isActive: this.value
+    };
+  },
+
+  computed: {
+    applicationProperty() {
+      return !this.bottom ? 'top' : 'bottom';
+    },
+
+    canScroll() {
+      return _mixins_scrollable__WEBPACK_IMPORTED_MODULE_4__["default"].options.computed.canScroll.call(this) && (this.invertedScroll || this.elevateOnScroll || this.hideOnScroll || this.collapseOnScroll || this.isBooted || // If falsey, user has provided an
+      // explicit value which should
+      // overwrite anything we do
+      !this.value);
+    },
+
+    classes() {
+      return { ..._VToolbar_VToolbar__WEBPACK_IMPORTED_MODULE_1__["default"].options.computed.classes.call(this),
+        'v-toolbar--collapse': this.collapse || this.collapseOnScroll,
+        'v-app-bar': true,
+        'v-app-bar--clipped': this.clippedLeft || this.clippedRight,
+        'v-app-bar--fade-img-on-scroll': this.fadeImgOnScroll,
+        'v-app-bar--elevate-on-scroll': this.elevateOnScroll,
+        'v-app-bar--fixed': !this.absolute && (this.app || this.fixed),
+        'v-app-bar--hide-shadow': this.hideShadow,
+        'v-app-bar--is-scrolled': this.currentScroll > 0,
+        'v-app-bar--shrink-on-scroll': this.shrinkOnScroll
+      };
+    },
+
+    computedContentHeight() {
+      if (!this.shrinkOnScroll) return _VToolbar_VToolbar__WEBPACK_IMPORTED_MODULE_1__["default"].options.computed.computedContentHeight.call(this);
+      const height = this.computedOriginalHeight;
+      const min = this.dense ? 48 : 56;
+      const max = height;
+      const difference = max - min;
+      const iteration = difference / this.computedScrollThreshold;
+      const offset = this.currentScroll * iteration;
+      return Math.max(min, max - offset);
+    },
+
+    computedFontSize() {
+      if (!this.isProminent) return undefined;
+      const max = this.dense ? 96 : 128;
+      const difference = max - this.computedContentHeight;
+      const increment = 0.00347; // 1.5rem to a minimum of 1.25rem
+
+      return Number((1.50 - difference * increment).toFixed(2));
+    },
+
+    computedLeft() {
+      if (!this.app || this.clippedLeft) return 0;
+      return this.$vuetify.application.left;
+    },
+
+    computedMarginTop() {
+      if (!this.app) return 0;
+      return this.$vuetify.application.bar;
+    },
+
+    computedOpacity() {
+      if (!this.fadeImgOnScroll) return undefined;
+      const opacity = Math.max((this.computedScrollThreshold - this.currentScroll) / this.computedScrollThreshold, 0);
+      return Number(parseFloat(opacity).toFixed(2));
+    },
+
+    computedOriginalHeight() {
+      let height = _VToolbar_VToolbar__WEBPACK_IMPORTED_MODULE_1__["default"].options.computed.computedContentHeight.call(this);
+      if (this.isExtended) height += parseInt(this.extensionHeight);
+      return height;
+    },
+
+    computedRight() {
+      if (!this.app || this.clippedRight) return 0;
+      return this.$vuetify.application.right;
+    },
+
+    computedScrollThreshold() {
+      if (this.scrollThreshold) return Number(this.scrollThreshold);
+      return this.computedOriginalHeight - (this.dense ? 48 : 56);
+    },
+
+    computedTransform() {
+      if (!this.canScroll || this.elevateOnScroll && this.currentScroll === 0 && this.isActive) return 0;
+      if (this.isActive) return 0;
+      const scrollOffScreen = this.scrollOffScreen ? this.computedHeight : this.computedContentHeight;
+      return this.bottom ? scrollOffScreen : -scrollOffScreen;
+    },
+
+    hideShadow() {
+      if (this.elevateOnScroll && this.isExtended) {
+        return this.currentScroll < this.computedScrollThreshold;
+      }
+
+      if (this.elevateOnScroll) {
+        return this.currentScroll === 0 || this.computedTransform < 0;
+      }
+
+      return (!this.isExtended || this.scrollOffScreen) && this.computedTransform !== 0;
+    },
+
+    isCollapsed() {
+      if (!this.collapseOnScroll) {
+        return _VToolbar_VToolbar__WEBPACK_IMPORTED_MODULE_1__["default"].options.computed.isCollapsed.call(this);
+      }
+
+      return this.currentScroll > 0;
+    },
+
+    isProminent() {
+      return _VToolbar_VToolbar__WEBPACK_IMPORTED_MODULE_1__["default"].options.computed.isProminent.call(this) || this.shrinkOnScroll;
+    },
+
+    styles() {
+      return { ..._VToolbar_VToolbar__WEBPACK_IMPORTED_MODULE_1__["default"].options.computed.styles.call(this),
+        fontSize: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_7__["convertToUnit"])(this.computedFontSize, 'rem'),
+        marginTop: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_7__["convertToUnit"])(this.computedMarginTop),
+        transform: `translateY(${Object(_util_helpers__WEBPACK_IMPORTED_MODULE_7__["convertToUnit"])(this.computedTransform)})`,
+        left: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_7__["convertToUnit"])(this.computedLeft),
+        right: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_7__["convertToUnit"])(this.computedRight)
+      };
+    }
+
+  },
+  watch: {
+    canScroll: 'onScroll',
+
+    computedTransform() {
+      // Normally we do not want the v-app-bar
+      // to update the application top value
+      // to avoid screen jump. However, in
+      // this situation, we must so that
+      // the clipped drawer can update
+      // its top value when scrolled
+      if (!this.canScroll || !this.clippedLeft && !this.clippedRight) return;
+      this.callUpdate();
+    },
+
+    invertedScroll(val) {
+      this.isActive = !val;
+    }
+
+  },
+
+  created() {
+    if (this.invertedScroll) this.isActive = false;
+  },
+
+  methods: {
+    genBackground() {
+      const render = _VToolbar_VToolbar__WEBPACK_IMPORTED_MODULE_1__["default"].options.methods.genBackground.call(this);
+      render.data = this._b(render.data || {}, render.tag, {
+        style: {
+          opacity: this.computedOpacity
+        }
+      });
+      return render;
+    },
+
+    updateApplication() {
+      return this.invertedScroll ? 0 : this.computedHeight + this.computedTransform;
+    },
+
+    thresholdMet() {
+      if (this.invertedScroll) {
+        this.isActive = this.currentScroll > this.computedScrollThreshold;
+        return;
+      }
+
+      if (this.currentThreshold < this.computedScrollThreshold) return;
+
+      if (this.hideOnScroll) {
+        this.isActive = this.isScrollingUp;
+      }
+
+      this.savedScroll = this.currentScroll;
+    }
+
+  },
+
+  render(h) {
+    const render = _VToolbar_VToolbar__WEBPACK_IMPORTED_MODULE_1__["default"].options.render.call(this, h);
+    render.data = render.data || {};
+
+    if (this.canScroll) {
+      render.data.directives = render.data.directives || [];
+      render.data.directives.push({
+        arg: this.scrollTarget,
+        name: 'scroll',
+        value: this.onScroll
+      });
+    }
+
+    return render;
+  }
+
+}));
+//# sourceMappingURL=VAppBar.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VAppBar/VAppBarNavIcon.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VAppBar/VAppBarNavIcon.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VIcon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
+/* harmony import */ var _VBtn_VBtn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../VBtn/VBtn */ "./node_modules/vuetify/lib/components/VBtn/VBtn.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+// Components
+
+ // Types
+
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_2___default.a.extend({
+  name: 'v-app-bar-nav-icon',
+  functional: true,
+
+  render(h, {
+    slots,
+    listeners,
+    props,
+    data
+  }) {
+    const d = Object.assign(data, {
+      staticClass: `v-app-bar__nav-icon ${data.staticClass || ''}`.trim(),
+      props: { ...props,
+        icon: true
+      },
+      on: listeners
+    });
+    const defaultSlot = slots().default;
+    return h(_VBtn_VBtn__WEBPACK_IMPORTED_MODULE_1__["default"], d, defaultSlot || [h(_VIcon__WEBPACK_IMPORTED_MODULE_0__["default"], '$menu')]);
+  }
+
+}));
+//# sourceMappingURL=VAppBarNavIcon.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VAppBar/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VAppBar/index.js ***!
+  \**************************************************************/
+/*! exports provided: VAppBar, VAppBarNavIcon, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VAppBar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VAppBar */ "./node_modules/vuetify/lib/components/VAppBar/VAppBar.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VAppBar", function() { return _VAppBar__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _VAppBarNavIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VAppBarNavIcon */ "./node_modules/vuetify/lib/components/VAppBar/VAppBarNavIcon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VAppBarNavIcon", function() { return _VAppBarNavIcon__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  $_vuetify_subcomponents: {
+    VAppBar: _VAppBar__WEBPACK_IMPORTED_MODULE_0__["default"],
+    VAppBarNavIcon: _VAppBarNavIcon__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
+});
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VAvatar/VAvatar.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VAvatar/VAvatar.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_components_VAvatar_VAvatar_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VAvatar/VAvatar.sass */ "./node_modules/vuetify/src/components/VAvatar/VAvatar.sass");
+/* harmony import */ var _src_components_VAvatar_VAvatar_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VAvatar_VAvatar_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mixins_colorable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/colorable */ "./node_modules/vuetify/lib/mixins/colorable/index.js");
+/* harmony import */ var _mixins_measurable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/measurable */ "./node_modules/vuetify/lib/mixins/measurable/index.js");
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/helpers */ "./node_modules/vuetify/lib/util/helpers.js");
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util/mixins */ "./node_modules/vuetify/lib/util/mixins.js");
+ // Mixins
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_4__["default"])(_mixins_colorable__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_measurable__WEBPACK_IMPORTED_MODULE_2__["default"]
+/* @vue/component */
+).extend({
+  name: 'v-avatar',
+  props: {
+    left: Boolean,
+    right: Boolean,
+    size: {
+      type: [Number, String],
+      default: 48
+    },
+    tile: Boolean
+  },
+  computed: {
+    classes() {
+      return {
+        'v-avatar--left': this.left,
+        'v-avatar--right': this.right,
+        'v-avatar--tile': this.tile
+      };
+    },
+
+    styles() {
+      return {
+        height: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__["convertToUnit"])(this.size),
+        minWidth: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__["convertToUnit"])(this.size),
+        width: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__["convertToUnit"])(this.size),
+        ...this.measurableStyles
+      };
+    }
+
+  },
+
+  render(h) {
+    const data = {
+      staticClass: 'v-avatar',
+      class: this.classes,
+      style: this.styles,
+      on: this.$listeners
+    };
+    return h('div', this.setBackgroundColor(this.color, data), this.$slots.default);
+  }
+
+}));
+//# sourceMappingURL=VAvatar.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VAvatar/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VAvatar/index.js ***!
+  \**************************************************************/
+/*! exports provided: VAvatar, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VAvatar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VAvatar */ "./node_modules/vuetify/lib/components/VAvatar/VAvatar.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VAvatar", function() { return _VAvatar__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_VAvatar__WEBPACK_IMPORTED_MODULE_0__["default"]);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
 /***/ "./node_modules/vuetify/lib/components/VBtn/VBtn.js":
 /*!**********************************************************!*\
   !*** ./node_modules/vuetify/lib/components/VBtn/VBtn.js ***!
@@ -94234,6 +94780,214 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = (_VBtn__WEBPACK_IMPORTED_MODULE_0__["default"]);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VContent/VContent.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VContent/VContent.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_components_VContent_VContent_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VContent/VContent.sass */ "./node_modules/vuetify/src/components/VContent/VContent.sass");
+/* harmony import */ var _src_components_VContent_VContent_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VContent_VContent_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mixins_ssr_bootable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/ssr-bootable */ "./node_modules/vuetify/lib/mixins/ssr-bootable/index.js");
+// Styles
+ // Mixins
+
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (_mixins_ssr_bootable__WEBPACK_IMPORTED_MODULE_1__["default"].extend({
+  name: 'v-content',
+  props: {
+    tag: {
+      type: String,
+      default: 'main'
+    }
+  },
+  computed: {
+    styles() {
+      const {
+        bar,
+        top,
+        right,
+        footer,
+        insetFooter,
+        bottom,
+        left
+      } = this.$vuetify.application;
+      return {
+        paddingTop: `${top + bar}px`,
+        paddingRight: `${right}px`,
+        paddingBottom: `${footer + insetFooter + bottom}px`,
+        paddingLeft: `${left}px`
+      };
+    }
+
+  },
+
+  render(h) {
+    const data = {
+      staticClass: 'v-content',
+      style: this.styles,
+      ref: 'content'
+    };
+    return h(this.tag, data, [h('div', {
+      staticClass: 'v-content__wrap'
+    }, this.$slots.default)]);
+  }
+
+}));
+//# sourceMappingURL=VContent.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VContent/index.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VContent/index.js ***!
+  \***************************************************************/
+/*! exports provided: VContent, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VContent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VContent */ "./node_modules/vuetify/lib/components/VContent/VContent.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VContent", function() { return _VContent__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_VContent__WEBPACK_IMPORTED_MODULE_0__["default"]);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VFooter/VFooter.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VFooter/VFooter.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_components_VFooter_VFooter_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VFooter/VFooter.sass */ "./node_modules/vuetify/src/components/VFooter/VFooter.sass");
+/* harmony import */ var _src_components_VFooter_VFooter_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VFooter_VFooter_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mixins_applicationable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/applicationable */ "./node_modules/vuetify/lib/mixins/applicationable/index.js");
+/* harmony import */ var _VSheet_VSheet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../VSheet/VSheet */ "./node_modules/vuetify/lib/components/VSheet/VSheet.js");
+/* harmony import */ var _mixins_ssr_bootable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/ssr-bootable */ "./node_modules/vuetify/lib/mixins/ssr-bootable/index.js");
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util/mixins */ "./node_modules/vuetify/lib/util/mixins.js");
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../util/helpers */ "./node_modules/vuetify/lib/util/helpers.js");
+// Styles
+ // Mixins
+
+
+
+ // Utilities
+
+
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_4__["default"])(_VSheet_VSheet__WEBPACK_IMPORTED_MODULE_2__["default"], Object(_mixins_applicationable__WEBPACK_IMPORTED_MODULE_1__["default"])('footer', ['height', 'inset']), _mixins_ssr_bootable__WEBPACK_IMPORTED_MODULE_3__["default"]).extend({
+  name: 'v-footer',
+  props: {
+    height: {
+      default: 'auto',
+      type: [Number, String]
+    },
+    inset: Boolean,
+    padless: Boolean,
+    tile: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    applicationProperty() {
+      return this.inset ? 'insetFooter' : 'footer';
+    },
+
+    classes() {
+      return { ..._VSheet_VSheet__WEBPACK_IMPORTED_MODULE_2__["default"].options.computed.classes.call(this),
+        'v-footer--absolute': this.absolute,
+        'v-footer--fixed': !this.absolute && (this.app || this.fixed),
+        'v-footer--padless': this.padless,
+        'v-footer--inset': this.inset
+      };
+    },
+
+    computedBottom() {
+      if (!this.isPositioned) return undefined;
+      return this.app ? this.$vuetify.application.bottom : 0;
+    },
+
+    computedLeft() {
+      if (!this.isPositioned) return undefined;
+      return this.app && this.inset ? this.$vuetify.application.left : 0;
+    },
+
+    computedRight() {
+      if (!this.isPositioned) return undefined;
+      return this.app && this.inset ? this.$vuetify.application.right : 0;
+    },
+
+    isPositioned() {
+      return Boolean(this.absolute || this.fixed || this.app);
+    },
+
+    styles() {
+      const height = parseInt(this.height);
+      return { ..._VSheet_VSheet__WEBPACK_IMPORTED_MODULE_2__["default"].options.computed.styles.call(this),
+        height: isNaN(height) ? height : Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["convertToUnit"])(height),
+        left: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["convertToUnit"])(this.computedLeft),
+        right: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["convertToUnit"])(this.computedRight),
+        bottom: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["convertToUnit"])(this.computedBottom)
+      };
+    }
+
+  },
+  methods: {
+    updateApplication() {
+      const height = parseInt(this.height);
+      return isNaN(height) ? this.$el ? this.$el.clientHeight : 0 : height;
+    }
+
+  },
+
+  render(h) {
+    const data = this.setBackgroundColor(this.color, {
+      staticClass: 'v-footer',
+      class: this.classes,
+      style: this.styles
+    });
+    return h('footer', data, this.$slots.default);
+  }
+
+}));
+//# sourceMappingURL=VFooter.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VFooter/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VFooter/index.js ***!
+  \**************************************************************/
+/*! exports provided: VFooter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VFooter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VFooter */ "./node_modules/vuetify/lib/components/VFooter/VFooter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VFooter", function() { return _VFooter__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_VFooter__WEBPACK_IMPORTED_MODULE_0__["default"]);
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -94498,6 +95252,1805 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vuetify/lib/components/VImg/VImg.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VImg/VImg.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_components_VImg_VImg_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VImg/VImg.sass */ "./node_modules/vuetify/src/components/VImg/VImg.sass");
+/* harmony import */ var _src_components_VImg_VImg_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VImg_VImg_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _directives_intersect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../directives/intersect */ "./node_modules/vuetify/lib/directives/intersect/index.js");
+/* harmony import */ var _VResponsive__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../VResponsive */ "./node_modules/vuetify/lib/components/VResponsive/index.js");
+/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/console */ "./node_modules/vuetify/lib/util/console.js");
+// Styles
+ // Directives
+
+ // Components
+
+ // Utils
+
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (_VResponsive__WEBPACK_IMPORTED_MODULE_2__["default"].extend({
+  name: 'v-img',
+  directives: {
+    intersect: _directives_intersect__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  props: {
+    alt: String,
+    contain: Boolean,
+    eager: Boolean,
+    gradient: String,
+    lazySrc: String,
+    options: {
+      type: Object,
+      // For more information on types, navigate to:
+      // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+      default: () => ({
+        root: undefined,
+        rootMargin: undefined,
+        threshold: undefined
+      })
+    },
+    position: {
+      type: String,
+      default: 'center center'
+    },
+    sizes: String,
+    src: {
+      type: [String, Object],
+      default: ''
+    },
+    srcset: String,
+    transition: {
+      type: [Boolean, String],
+      default: 'fade-transition'
+    }
+  },
+
+  data() {
+    return {
+      currentSrc: '',
+      image: null,
+      isLoading: true,
+      calculatedAspectRatio: undefined,
+      naturalWidth: undefined
+    };
+  },
+
+  computed: {
+    computedAspectRatio() {
+      return Number(this.normalisedSrc.aspect || this.calculatedAspectRatio);
+    },
+
+    hasIntersect() {
+      return typeof window !== 'undefined' && 'IntersectionObserver' in window;
+    },
+
+    normalisedSrc() {
+      return typeof this.src === 'string' ? {
+        src: this.src,
+        srcset: this.srcset,
+        lazySrc: this.lazySrc,
+        aspect: Number(this.aspectRatio || 0)
+      } : {
+        src: this.src.src,
+        srcset: this.srcset || this.src.srcset,
+        lazySrc: this.lazySrc || this.src.lazySrc,
+        aspect: Number(this.aspectRatio || this.src.aspect)
+      };
+    },
+
+    __cachedImage() {
+      if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc)) return [];
+      const backgroundImage = [];
+      const src = this.isLoading ? this.normalisedSrc.lazySrc : this.currentSrc;
+      if (this.gradient) backgroundImage.push(`linear-gradient(${this.gradient})`);
+      if (src) backgroundImage.push(`url("${src}")`);
+      const image = this.$createElement('div', {
+        staticClass: 'v-image__image',
+        class: {
+          'v-image__image--preload': this.isLoading,
+          'v-image__image--contain': this.contain,
+          'v-image__image--cover': !this.contain
+        },
+        style: {
+          backgroundImage: backgroundImage.join(', '),
+          backgroundPosition: this.position
+        },
+        key: +this.isLoading
+      });
+      /* istanbul ignore if */
+
+      if (!this.transition) return image;
+      return this.$createElement('transition', {
+        attrs: {
+          name: this.transition,
+          mode: 'in-out'
+        }
+      }, [image]);
+    }
+
+  },
+  watch: {
+    src() {
+      // Force re-init when src changes
+      if (!this.isLoading) this.init(undefined, undefined, true);else this.loadImage();
+    },
+
+    '$vuetify.breakpoint.width': 'getSrc'
+  },
+
+  mounted() {
+    this.init();
+  },
+
+  methods: {
+    init(entries, observer, isIntersecting) {
+      // If the current browser supports the intersection
+      // observer api, the image is not observable, and
+      // the eager prop isn't being used, do not load
+      if (this.hasIntersect && !isIntersecting && !this.eager) return;
+
+      if (this.normalisedSrc.lazySrc) {
+        const lazyImg = new Image();
+        lazyImg.src = this.normalisedSrc.lazySrc;
+        this.pollForSize(lazyImg, null);
+      }
+      /* istanbul ignore else */
+
+
+      if (this.normalisedSrc.src) this.loadImage();
+    },
+
+    onLoad() {
+      this.getSrc();
+      this.isLoading = false;
+      this.$emit('load', this.src);
+    },
+
+    onError() {
+      Object(_util_console__WEBPACK_IMPORTED_MODULE_3__["consoleError"])(`Image load failed\n\n` + `src: ${this.normalisedSrc.src}`, this);
+      this.$emit('error', this.src);
+    },
+
+    getSrc() {
+      /* istanbul ignore else */
+      if (this.image) this.currentSrc = this.image.currentSrc || this.image.src;
+    },
+
+    loadImage() {
+      const image = new Image();
+      this.image = image;
+
+      image.onload = () => {
+        /* istanbul ignore if */
+        if (image.decode) {
+          image.decode().catch(err => {
+            Object(_util_console__WEBPACK_IMPORTED_MODULE_3__["consoleWarn"])(`Failed to decode image, trying to render anyway\n\n` + `src: ${this.normalisedSrc.src}` + (err.message ? `\nOriginal error: ${err.message}` : ''), this);
+          }).then(this.onLoad);
+        } else {
+          this.onLoad();
+        }
+      };
+
+      image.onerror = this.onError;
+      image.src = this.normalisedSrc.src;
+      this.sizes && (image.sizes = this.sizes);
+      this.normalisedSrc.srcset && (image.srcset = this.normalisedSrc.srcset);
+      this.aspectRatio || this.pollForSize(image);
+      this.getSrc();
+    },
+
+    pollForSize(img, timeout = 100) {
+      const poll = () => {
+        const {
+          naturalHeight,
+          naturalWidth
+        } = img;
+
+        if (naturalHeight || naturalWidth) {
+          this.naturalWidth = naturalWidth;
+          this.calculatedAspectRatio = naturalWidth / naturalHeight;
+        } else {
+          timeout != null && setTimeout(poll, timeout);
+        }
+      };
+
+      poll();
+    },
+
+    genContent() {
+      const content = _VResponsive__WEBPACK_IMPORTED_MODULE_2__["default"].options.methods.genContent.call(this);
+
+      if (this.naturalWidth) {
+        this._b(content.data, 'div', {
+          style: {
+            width: `${this.naturalWidth}px`
+          }
+        });
+      }
+
+      return content;
+    },
+
+    __genPlaceholder() {
+      if (this.$slots.placeholder) {
+        const placeholder = this.isLoading ? [this.$createElement('div', {
+          staticClass: 'v-image__placeholder'
+        }, this.$slots.placeholder)] : [];
+        if (!this.transition) return placeholder[0];
+        return this.$createElement('transition', {
+          props: {
+            appear: true,
+            name: this.transition
+          }
+        }, placeholder);
+      }
+    }
+
+  },
+
+  render(h) {
+    const node = _VResponsive__WEBPACK_IMPORTED_MODULE_2__["default"].options.render.call(this, h);
+    node.data.staticClass += ' v-image'; // Only load intersect directive if it
+    // will work in the current browser.
+
+    node.data.directives = this.hasIntersect ? [{
+      name: 'intersect',
+      options: this.options,
+      modifiers: {
+        once: true
+      },
+      value: this.init
+    }] : [];
+    node.data.attrs = {
+      role: this.alt ? 'img' : undefined,
+      'aria-label': this.alt
+    };
+    node.children = [this.__cachedSizer, this.__cachedImage, this.__genPlaceholder(), this.genContent()];
+    return h(node.tag, node.data, node.children);
+  }
+
+}));
+//# sourceMappingURL=VImg.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VItemGroup/VItemGroup.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VItemGroup/VItemGroup.js ***!
+  \**********************************************************************/
+/*! exports provided: BaseItemGroup, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseItemGroup", function() { return BaseItemGroup; });
+/* harmony import */ var _src_components_VItemGroup_VItemGroup_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VItemGroup/VItemGroup.sass */ "./node_modules/vuetify/src/components/VItemGroup/VItemGroup.sass");
+/* harmony import */ var _src_components_VItemGroup_VItemGroup_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VItemGroup_VItemGroup_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mixins_proxyable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/proxyable */ "./node_modules/vuetify/lib/mixins/proxyable/index.js");
+/* harmony import */ var _mixins_themeable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/themeable */ "./node_modules/vuetify/lib/mixins/themeable/index.js");
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/mixins */ "./node_modules/vuetify/lib/util/mixins.js");
+/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util/console */ "./node_modules/vuetify/lib/util/console.js");
+// Styles
+
+
+ // Utilities
+
+
+
+const BaseItemGroup = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_3__["default"])(_mixins_proxyable__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_themeable__WEBPACK_IMPORTED_MODULE_2__["default"]).extend({
+  name: 'base-item-group',
+  props: {
+    activeClass: {
+      type: String,
+      default: 'v-item--active'
+    },
+    mandatory: Boolean,
+    max: {
+      type: [Number, String],
+      default: null
+    },
+    multiple: Boolean
+  },
+
+  data() {
+    return {
+      // As long as a value is defined, show it
+      // Otherwise, check if multiple
+      // to determine which default to provide
+      internalLazyValue: this.value !== undefined ? this.value : this.multiple ? [] : undefined,
+      items: []
+    };
+  },
+
+  computed: {
+    classes() {
+      return {
+        'v-item-group': true,
+        ...this.themeClasses
+      };
+    },
+
+    selectedIndex() {
+      return this.selectedItem && this.items.indexOf(this.selectedItem) || -1;
+    },
+
+    selectedItem() {
+      if (this.multiple) return undefined;
+      return this.selectedItems[0];
+    },
+
+    selectedItems() {
+      return this.items.filter((item, index) => {
+        return this.toggleMethod(this.getValue(item, index));
+      });
+    },
+
+    selectedValues() {
+      if (this.internalValue == null) return [];
+      return Array.isArray(this.internalValue) ? this.internalValue : [this.internalValue];
+    },
+
+    toggleMethod() {
+      if (!this.multiple) {
+        return v => this.internalValue === v;
+      }
+
+      const internalValue = this.internalValue;
+
+      if (Array.isArray(internalValue)) {
+        return v => internalValue.includes(v);
+      }
+
+      return () => false;
+    }
+
+  },
+  watch: {
+    internalValue: 'updateItemsState',
+    items: 'updateItemsState'
+  },
+
+  created() {
+    if (this.multiple && !Array.isArray(this.internalValue)) {
+      Object(_util_console__WEBPACK_IMPORTED_MODULE_4__["consoleWarn"])('Model must be bound to an array if the multiple property is true.', this);
+    }
+  },
+
+  methods: {
+    genData() {
+      return {
+        class: this.classes
+      };
+    },
+
+    getValue(item, i) {
+      return item.value == null || item.value === '' ? i : item.value;
+    },
+
+    onClick(item) {
+      this.updateInternalValue(this.getValue(item, this.items.indexOf(item)));
+    },
+
+    register(item) {
+      const index = this.items.push(item) - 1;
+      item.$on('change', () => this.onClick(item)); // If no value provided and mandatory,
+      // assign first registered item
+
+      if (this.mandatory && !this.selectedValues.length) {
+        this.updateMandatory();
+      }
+
+      this.updateItem(item, index);
+    },
+
+    unregister(item) {
+      if (this._isDestroyed) return;
+      const index = this.items.indexOf(item);
+      const value = this.getValue(item, index);
+      this.items.splice(index, 1);
+      const valueIndex = this.selectedValues.indexOf(value); // Items is not selected, do nothing
+
+      if (valueIndex < 0) return; // If not mandatory, use regular update process
+
+      if (!this.mandatory) {
+        return this.updateInternalValue(value);
+      } // Remove the value
+
+
+      if (this.multiple && Array.isArray(this.internalValue)) {
+        this.internalValue = this.internalValue.filter(v => v !== value);
+      } else {
+        this.internalValue = undefined;
+      } // If mandatory and we have no selection
+      // add the last item as value
+
+      /* istanbul ignore else */
+
+
+      if (!this.selectedItems.length) {
+        this.updateMandatory(true);
+      }
+    },
+
+    updateItem(item, index) {
+      const value = this.getValue(item, index);
+      item.isActive = this.toggleMethod(value);
+    },
+
+    // https://github.com/vuetifyjs/vuetify/issues/5352
+    updateItemsState() {
+      this.$nextTick(() => {
+        if (this.mandatory && !this.selectedItems.length) {
+          return this.updateMandatory();
+        } // TODO: Make this smarter so it
+        // doesn't have to iterate every
+        // child in an update
+
+
+        this.items.forEach(this.updateItem);
+      });
+    },
+
+    updateInternalValue(value) {
+      this.multiple ? this.updateMultiple(value) : this.updateSingle(value);
+    },
+
+    updateMandatory(last) {
+      if (!this.items.length) return;
+      const items = this.items.slice();
+      if (last) items.reverse();
+      const item = items.find(item => !item.disabled); // If no tabs are available
+      // aborts mandatory value
+
+      if (!item) return;
+      const index = this.items.indexOf(item);
+      this.updateInternalValue(this.getValue(item, index));
+    },
+
+    updateMultiple(value) {
+      const defaultValue = Array.isArray(this.internalValue) ? this.internalValue : [];
+      const internalValue = defaultValue.slice();
+      const index = internalValue.findIndex(val => val === value);
+      if (this.mandatory && // Item already exists
+      index > -1 && // value would be reduced below min
+      internalValue.length - 1 < 1) return;
+      if ( // Max is set
+      this.max != null && // Item doesn't exist
+      index < 0 && // value would be increased above max
+      internalValue.length + 1 > this.max) return;
+      index > -1 ? internalValue.splice(index, 1) : internalValue.push(value);
+      this.internalValue = internalValue;
+    },
+
+    updateSingle(value) {
+      const isSame = value === this.internalValue;
+      if (this.mandatory && isSame) return;
+      this.internalValue = isSame ? undefined : value;
+    }
+
+  },
+
+  render(h) {
+    return h('div', this.genData(), this.$slots.default);
+  }
+
+});
+/* harmony default export */ __webpack_exports__["default"] = (BaseItemGroup.extend({
+  name: 'v-item-group',
+
+  provide() {
+    return {
+      itemGroup: this
+    };
+  }
+
+}));
+//# sourceMappingURL=VItemGroup.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VList/VList.js":
+/*!************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VList/VList.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_components_VList_VList_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VList/VList.sass */ "./node_modules/vuetify/src/components/VList/VList.sass");
+/* harmony import */ var _src_components_VList_VList_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VList_VList_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _VSheet_VSheet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../VSheet/VSheet */ "./node_modules/vuetify/lib/components/VSheet/VSheet.js");
+// Styles
+ // Components
+
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (_VSheet_VSheet__WEBPACK_IMPORTED_MODULE_1__["default"].extend().extend({
+  name: 'v-list',
+
+  provide() {
+    return {
+      isInList: true,
+      list: this
+    };
+  },
+
+  inject: {
+    isInMenu: {
+      default: false
+    },
+    isInNav: {
+      default: false
+    }
+  },
+  props: {
+    dense: Boolean,
+    disabled: Boolean,
+    expand: Boolean,
+    flat: Boolean,
+    nav: Boolean,
+    rounded: Boolean,
+    shaped: Boolean,
+    subheader: Boolean,
+    threeLine: Boolean,
+    tile: {
+      type: Boolean,
+      default: true
+    },
+    twoLine: Boolean
+  },
+  data: () => ({
+    groups: []
+  }),
+  computed: {
+    classes() {
+      return { ..._VSheet_VSheet__WEBPACK_IMPORTED_MODULE_1__["default"].options.computed.classes.call(this),
+        'v-list--dense': this.dense,
+        'v-list--disabled': this.disabled,
+        'v-list--flat': this.flat,
+        'v-list--nav': this.nav,
+        'v-list--rounded': this.rounded,
+        'v-list--shaped': this.shaped,
+        'v-list--subheader': this.subheader,
+        'v-list--two-line': this.twoLine,
+        'v-list--three-line': this.threeLine
+      };
+    }
+
+  },
+  methods: {
+    register(content) {
+      this.groups.push(content);
+    },
+
+    unregister(content) {
+      const index = this.groups.findIndex(g => g._uid === content._uid);
+      if (index > -1) this.groups.splice(index, 1);
+    },
+
+    listClick(uid) {
+      if (this.expand) return;
+
+      for (const group of this.groups) {
+        group.toggle(uid);
+      }
+    }
+
+  },
+
+  render(h) {
+    const data = {
+      staticClass: 'v-list',
+      class: this.classes,
+      style: this.styles,
+      attrs: {
+        role: this.isInNav || this.isInMenu ? undefined : 'list',
+        ...this.attrs$
+      }
+    };
+    return h(this.tag, this.setBackgroundColor(this.color, data), [this.$slots.default]);
+  }
+
+}));
+//# sourceMappingURL=VList.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VList/VListGroup.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VList/VListGroup.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_components_VList_VListGroup_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VList/VListGroup.sass */ "./node_modules/vuetify/src/components/VList/VListGroup.sass");
+/* harmony import */ var _src_components_VList_VListGroup_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VList_VListGroup_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _VIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
+/* harmony import */ var _VListItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VListItem */ "./node_modules/vuetify/lib/components/VList/VListItem.js");
+/* harmony import */ var _VListItemIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./VListItemIcon */ "./node_modules/vuetify/lib/components/VList/VListItemIcon.js");
+/* harmony import */ var _mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../mixins/binds-attrs */ "./node_modules/vuetify/lib/mixins/binds-attrs/index.js");
+/* harmony import */ var _mixins_bootable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../mixins/bootable */ "./node_modules/vuetify/lib/mixins/bootable/index.js");
+/* harmony import */ var _mixins_colorable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../mixins/colorable */ "./node_modules/vuetify/lib/mixins/colorable/index.js");
+/* harmony import */ var _mixins_toggleable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../mixins/toggleable */ "./node_modules/vuetify/lib/mixins/toggleable/index.js");
+/* harmony import */ var _mixins_registrable__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../mixins/registrable */ "./node_modules/vuetify/lib/mixins/registrable/index.js");
+/* harmony import */ var _directives_ripple__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../directives/ripple */ "./node_modules/vuetify/lib/directives/ripple/index.js");
+/* harmony import */ var _transitions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../transitions */ "./node_modules/vuetify/lib/components/transitions/index.js");
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../util/mixins */ "./node_modules/vuetify/lib/util/mixins.js");
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../util/helpers */ "./node_modules/vuetify/lib/util/helpers.js");
+// Styles
+ // Components
+
+
+
+ // Mixins
+
+
+
+
+
+ // Directives
+
+ // Transitions
+
+ // Utils
+
+
+
+const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_11__["default"])(_mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_bootable__WEBPACK_IMPORTED_MODULE_5__["default"], _mixins_colorable__WEBPACK_IMPORTED_MODULE_6__["default"], Object(_mixins_registrable__WEBPACK_IMPORTED_MODULE_8__["inject"])('list'), _mixins_toggleable__WEBPACK_IMPORTED_MODULE_7__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (baseMixins.extend().extend({
+  name: 'v-list-group',
+  directives: {
+    ripple: _directives_ripple__WEBPACK_IMPORTED_MODULE_9__["default"]
+  },
+  props: {
+    activeClass: {
+      type: String,
+      default: ''
+    },
+    appendIcon: {
+      type: String,
+      default: '$expand'
+    },
+    color: {
+      type: String,
+      default: 'primary'
+    },
+    disabled: Boolean,
+    group: String,
+    noAction: Boolean,
+    prependIcon: String,
+    ripple: {
+      type: [Boolean, Object],
+      default: true
+    },
+    subGroup: Boolean
+  },
+  computed: {
+    classes() {
+      return {
+        'v-list-group--active': this.isActive,
+        'v-list-group--disabled': this.disabled,
+        'v-list-group--no-action': this.noAction,
+        'v-list-group--sub-group': this.subGroup
+      };
+    }
+
+  },
+  watch: {
+    isActive(val) {
+      /* istanbul ignore else */
+      if (!this.subGroup && val) {
+        this.list && this.list.listClick(this._uid);
+      }
+    },
+
+    $route: 'onRouteChange'
+  },
+
+  created() {
+    this.list && this.list.register(this);
+
+    if (this.group && this.$route && this.value == null) {
+      this.isActive = this.matchRoute(this.$route.path);
+    }
+  },
+
+  beforeDestroy() {
+    this.list && this.list.unregister(this);
+  },
+
+  methods: {
+    click(e) {
+      if (this.disabled) return;
+      this.isBooted = true;
+      this.$emit('click', e);
+      this.$nextTick(() => this.isActive = !this.isActive);
+    },
+
+    genIcon(icon) {
+      return this.$createElement(_VIcon__WEBPACK_IMPORTED_MODULE_1__["default"], icon);
+    },
+
+    genAppendIcon() {
+      const icon = !this.subGroup ? this.appendIcon : false;
+      if (!icon && !this.$slots.appendIcon) return null;
+      return this.$createElement(_VListItemIcon__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        staticClass: 'v-list-group__header__append-icon'
+      }, [this.$slots.appendIcon || this.genIcon(icon)]);
+    },
+
+    genHeader() {
+      return this.$createElement(_VListItem__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        staticClass: 'v-list-group__header',
+        attrs: {
+          'aria-expanded': String(this.isActive),
+          role: 'button'
+        },
+        class: {
+          [this.activeClass]: this.isActive
+        },
+        props: {
+          inputValue: this.isActive
+        },
+        directives: [{
+          name: 'ripple',
+          value: this.ripple
+        }],
+        on: { ...this.listeners$,
+          click: this.click
+        }
+      }, [this.genPrependIcon(), this.$slots.activator, this.genAppendIcon()]);
+    },
+
+    genItems() {
+      return this.showLazyContent(() => [this.$createElement('div', {
+        staticClass: 'v-list-group__items',
+        directives: [{
+          name: 'show',
+          value: this.isActive
+        }]
+      }, Object(_util_helpers__WEBPACK_IMPORTED_MODULE_12__["getSlot"])(this))]);
+    },
+
+    genPrependIcon() {
+      const icon = this.subGroup && this.prependIcon == null ? '$subgroup' : this.prependIcon;
+      if (!icon && !this.$slots.prependIcon) return null;
+      return this.$createElement(_VListItemIcon__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        staticClass: 'v-list-group__header__prepend-icon'
+      }, [this.$slots.prependIcon || this.genIcon(icon)]);
+    },
+
+    onRouteChange(to) {
+      /* istanbul ignore if */
+      if (!this.group) return;
+      const isActive = this.matchRoute(to.path);
+      /* istanbul ignore else */
+
+      if (isActive && this.isActive !== isActive) {
+        this.list && this.list.listClick(this._uid);
+      }
+
+      this.isActive = isActive;
+    },
+
+    toggle(uid) {
+      const isActive = this._uid === uid;
+      if (isActive) this.isBooted = true;
+      this.$nextTick(() => this.isActive = isActive);
+    },
+
+    matchRoute(to) {
+      return to.match(this.group) !== null;
+    }
+
+  },
+
+  render(h) {
+    return h('div', this.setTextColor(this.isActive && this.color, {
+      staticClass: 'v-list-group',
+      class: this.classes
+    }), [this.genHeader(), h(_transitions__WEBPACK_IMPORTED_MODULE_10__["VExpandTransition"], this.genItems())]);
+  }
+
+}));
+//# sourceMappingURL=VListGroup.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VList/VListItem.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VList/VListItem.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_components_VList_VListItem_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VList/VListItem.sass */ "./node_modules/vuetify/src/components/VList/VListItem.sass");
+/* harmony import */ var _src_components_VList_VListItem_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VList_VListItem_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mixins_colorable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/colorable */ "./node_modules/vuetify/lib/mixins/colorable/index.js");
+/* harmony import */ var _mixins_routable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/routable */ "./node_modules/vuetify/lib/mixins/routable/index.js");
+/* harmony import */ var _mixins_groupable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/groupable */ "./node_modules/vuetify/lib/mixins/groupable/index.js");
+/* harmony import */ var _mixins_themeable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../mixins/themeable */ "./node_modules/vuetify/lib/mixins/themeable/index.js");
+/* harmony import */ var _mixins_toggleable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../mixins/toggleable */ "./node_modules/vuetify/lib/mixins/toggleable/index.js");
+/* harmony import */ var _directives_ripple__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../directives/ripple */ "./node_modules/vuetify/lib/directives/ripple/index.js");
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../../util/helpers */ "./node_modules/vuetify/lib/util/helpers.js");
+/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../util/console */ "./node_modules/vuetify/lib/util/console.js");
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../util/mixins */ "./node_modules/vuetify/lib/util/mixins.js");
+// Styles
+ // Mixins
+
+
+
+
+
+ // Directives
+
+ // Utilities
+
+
+ // Types
+
+
+const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__["default"])(_mixins_colorable__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_routable__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_themeable__WEBPACK_IMPORTED_MODULE_4__["default"], Object(_mixins_groupable__WEBPACK_IMPORTED_MODULE_3__["factory"])('listItemGroup'), Object(_mixins_toggleable__WEBPACK_IMPORTED_MODULE_5__["factory"])('inputValue'));
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (baseMixins.extend().extend({
+  name: 'v-list-item',
+  directives: {
+    Ripple: _directives_ripple__WEBPACK_IMPORTED_MODULE_6__["default"]
+  },
+  inheritAttrs: false,
+  inject: {
+    isInGroup: {
+      default: false
+    },
+    isInList: {
+      default: false
+    },
+    isInMenu: {
+      default: false
+    },
+    isInNav: {
+      default: false
+    }
+  },
+  props: {
+    activeClass: {
+      type: String,
+
+      default() {
+        if (!this.listItemGroup) return '';
+        return this.listItemGroup.activeClass;
+      }
+
+    },
+    dense: Boolean,
+    inactive: Boolean,
+    link: Boolean,
+    selectable: {
+      type: Boolean
+    },
+    tag: {
+      type: String,
+      default: 'div'
+    },
+    threeLine: Boolean,
+    twoLine: Boolean,
+    value: null
+  },
+  data: () => ({
+    proxyClass: 'v-list-item--active'
+  }),
+  computed: {
+    classes() {
+      return {
+        'v-list-item': true,
+        ..._mixins_routable__WEBPACK_IMPORTED_MODULE_2__["default"].options.computed.classes.call(this),
+        'v-list-item--dense': this.dense,
+        'v-list-item--disabled': this.disabled,
+        'v-list-item--link': this.isClickable && !this.inactive,
+        'v-list-item--selectable': this.selectable,
+        'v-list-item--three-line': this.threeLine,
+        'v-list-item--two-line': this.twoLine,
+        ...this.themeClasses
+      };
+    },
+
+    isClickable() {
+      return Boolean(_mixins_routable__WEBPACK_IMPORTED_MODULE_2__["default"].options.computed.isClickable.call(this) || this.listItemGroup);
+    }
+
+  },
+
+  created() {
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('avatar')) {
+      Object(_util_console__WEBPACK_IMPORTED_MODULE_8__["removed"])('avatar', this);
+    }
+  },
+
+  methods: {
+    click(e) {
+      if (e.detail) this.$el.blur();
+      this.$emit('click', e);
+      this.to || this.toggle();
+    },
+
+    genAttrs() {
+      const attrs = {
+        'aria-disabled': this.disabled ? true : undefined,
+        tabindex: this.isClickable && !this.disabled ? 0 : -1,
+        ...this.$attrs
+      };
+
+      if (this.$attrs.hasOwnProperty('role')) {// do nothing, role already provided
+      } else if (this.isInNav) {// do nothing, role is inherit
+      } else if (this.isInGroup) {
+        attrs.role = 'listitem';
+        attrs['aria-selected'] = String(this.isActive);
+      } else if (this.isInMenu) {
+        attrs.role = this.isClickable ? 'menuitem' : undefined;
+        attrs.id = attrs.id || `list-item-${this._uid}`;
+      } else if (this.isInList) {
+        attrs.role = 'listitem';
+      }
+
+      return attrs;
+    }
+
+  },
+
+  render(h) {
+    let {
+      tag,
+      data
+    } = this.generateRouteLink();
+    data.attrs = { ...data.attrs,
+      ...this.genAttrs()
+    };
+    data.on = { ...data.on,
+      click: this.click,
+      keydown: e => {
+        /* istanbul ignore else */
+        if (e.keyCode === _util_helpers__WEBPACK_IMPORTED_MODULE_7__["keyCodes"].enter) this.click(e);
+        this.$emit('keydown', e);
+      }
+    };
+    const children = this.$scopedSlots.default ? this.$scopedSlots.default({
+      active: this.isActive,
+      toggle: this.toggle
+    }) : this.$slots.default;
+    tag = this.inactive ? 'div' : tag;
+    return h(tag, this.setTextColor(this.color, data), children);
+  }
+
+}));
+//# sourceMappingURL=VListItem.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VList/VListItemAction.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VList/VListItemAction.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+// Types
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend({
+  name: 'v-list-item-action',
+  functional: true,
+
+  render(h, {
+    data,
+    children = []
+  }) {
+    data.staticClass = data.staticClass ? `v-list-item__action ${data.staticClass}` : 'v-list-item__action';
+    const filteredChild = children.filter(VNode => {
+      return VNode.isComment === false && VNode.text !== ' ';
+    });
+    if (filteredChild.length > 1) data.staticClass += ' v-list-item__action--stack';
+    return h('div', data, children);
+  }
+
+}));
+//# sourceMappingURL=VListItemAction.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VList/VListItemAvatar.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VList/VListItemAvatar.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VAvatar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../VAvatar */ "./node_modules/vuetify/lib/components/VAvatar/index.js");
+// Components
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (_VAvatar__WEBPACK_IMPORTED_MODULE_0__["default"].extend({
+  name: 'v-list-item-avatar',
+  props: {
+    horizontal: Boolean,
+    size: {
+      type: [Number, String],
+      default: 40
+    }
+  },
+  computed: {
+    classes() {
+      return {
+        'v-list-item__avatar--horizontal': this.horizontal,
+        ..._VAvatar__WEBPACK_IMPORTED_MODULE_0__["default"].options.computed.classes.call(this),
+        'v-avatar--tile': this.tile || this.horizontal
+      };
+    }
+
+  },
+
+  render(h) {
+    const render = _VAvatar__WEBPACK_IMPORTED_MODULE_0__["default"].options.render.call(this, h);
+    render.data = render.data || {};
+    render.data.staticClass += ' v-list-item__avatar';
+    return render;
+  }
+
+}));
+//# sourceMappingURL=VListItemAvatar.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VList/VListItemGroup.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VList/VListItemGroup.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_components_VList_VListItemGroup_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VList/VListItemGroup.sass */ "./node_modules/vuetify/src/components/VList/VListItemGroup.sass");
+/* harmony import */ var _src_components_VList_VListItemGroup_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VList_VListItemGroup_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _VItemGroup_VItemGroup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../VItemGroup/VItemGroup */ "./node_modules/vuetify/lib/components/VItemGroup/VItemGroup.js");
+/* harmony import */ var _mixins_colorable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/colorable */ "./node_modules/vuetify/lib/mixins/colorable/index.js");
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/mixins */ "./node_modules/vuetify/lib/util/mixins.js");
+// Styles
+ // Extensions
+
+ // Mixins
+
+ // Utilities
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_3__["default"])(_VItemGroup_VItemGroup__WEBPACK_IMPORTED_MODULE_1__["BaseItemGroup"], _mixins_colorable__WEBPACK_IMPORTED_MODULE_2__["default"]).extend({
+  name: 'v-list-item-group',
+
+  provide() {
+    return {
+      isInGroup: true,
+      listItemGroup: this
+    };
+  },
+
+  computed: {
+    classes() {
+      return { ..._VItemGroup_VItemGroup__WEBPACK_IMPORTED_MODULE_1__["BaseItemGroup"].options.computed.classes.call(this),
+        'v-list-item-group': true
+      };
+    }
+
+  },
+  methods: {
+    genData() {
+      return this.setTextColor(this.color, { ..._VItemGroup_VItemGroup__WEBPACK_IMPORTED_MODULE_1__["BaseItemGroup"].options.methods.genData.call(this),
+        attrs: {
+          role: 'listbox'
+        }
+      });
+    }
+
+  }
+}));
+//# sourceMappingURL=VListItemGroup.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VList/VListItemIcon.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VList/VListItemIcon.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+// Types
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend({
+  name: 'v-list-item-icon',
+  functional: true,
+
+  render(h, {
+    data,
+    children
+  }) {
+    data.staticClass = `v-list-item__icon ${data.staticClass || ''}`.trim();
+    return h('div', data, children);
+  }
+
+}));
+//# sourceMappingURL=VListItemIcon.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VList/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VList/index.js ***!
+  \************************************************************/
+/*! exports provided: VListItemActionText, VListItemContent, VListItemTitle, VListItemSubtitle, VList, VListGroup, VListItem, VListItemAction, VListItemAvatar, VListItemIcon, VListItemGroup, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VListItemActionText", function() { return VListItemActionText; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VListItemContent", function() { return VListItemContent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VListItemTitle", function() { return VListItemTitle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VListItemSubtitle", function() { return VListItemSubtitle; });
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../util/helpers */ "./node_modules/vuetify/lib/util/helpers.js");
+/* harmony import */ var _VList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VList */ "./node_modules/vuetify/lib/components/VList/VList.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VList", function() { return _VList__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+/* harmony import */ var _VListGroup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VListGroup */ "./node_modules/vuetify/lib/components/VList/VListGroup.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VListGroup", function() { return _VListGroup__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+/* harmony import */ var _VListItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./VListItem */ "./node_modules/vuetify/lib/components/VList/VListItem.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VListItem", function() { return _VListItem__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
+/* harmony import */ var _VListItemGroup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./VListItemGroup */ "./node_modules/vuetify/lib/components/VList/VListItemGroup.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VListItemGroup", function() { return _VListItemGroup__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+
+/* harmony import */ var _VListItemAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./VListItemAction */ "./node_modules/vuetify/lib/components/VList/VListItemAction.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VListItemAction", function() { return _VListItemAction__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+
+/* harmony import */ var _VListItemAvatar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./VListItemAvatar */ "./node_modules/vuetify/lib/components/VList/VListItemAvatar.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VListItemAvatar", function() { return _VListItemAvatar__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+
+/* harmony import */ var _VListItemIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./VListItemIcon */ "./node_modules/vuetify/lib/components/VList/VListItemIcon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VListItemIcon", function() { return _VListItemIcon__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+
+
+
+
+
+
+
+
+
+const VListItemActionText = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_0__["createSimpleFunctional"])('v-list-item__action-text', 'span');
+const VListItemContent = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_0__["createSimpleFunctional"])('v-list-item__content', 'div');
+const VListItemTitle = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_0__["createSimpleFunctional"])('v-list-item__title', 'div');
+const VListItemSubtitle = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_0__["createSimpleFunctional"])('v-list-item__subtitle', 'div');
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  $_vuetify_subcomponents: {
+    VList: _VList__WEBPACK_IMPORTED_MODULE_1__["default"],
+    VListGroup: _VListGroup__WEBPACK_IMPORTED_MODULE_2__["default"],
+    VListItem: _VListItem__WEBPACK_IMPORTED_MODULE_3__["default"],
+    VListItemAction: _VListItemAction__WEBPACK_IMPORTED_MODULE_5__["default"],
+    VListItemActionText,
+    VListItemAvatar: _VListItemAvatar__WEBPACK_IMPORTED_MODULE_6__["default"],
+    VListItemContent,
+    VListItemGroup: _VListItemGroup__WEBPACK_IMPORTED_MODULE_4__["default"],
+    VListItemIcon: _VListItemIcon__WEBPACK_IMPORTED_MODULE_7__["default"],
+    VListItemSubtitle,
+    VListItemTitle
+  }
+});
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VNavigationDrawer/VNavigationDrawer.js":
+/*!************************************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VNavigationDrawer/VNavigationDrawer.js ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_components_VNavigationDrawer_VNavigationDrawer_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VNavigationDrawer/VNavigationDrawer.sass */ "./node_modules/vuetify/src/components/VNavigationDrawer/VNavigationDrawer.sass");
+/* harmony import */ var _src_components_VNavigationDrawer_VNavigationDrawer_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VNavigationDrawer_VNavigationDrawer_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _VImg_VImg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../VImg/VImg */ "./node_modules/vuetify/lib/components/VImg/VImg.js");
+/* harmony import */ var _mixins_applicationable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/applicationable */ "./node_modules/vuetify/lib/mixins/applicationable/index.js");
+/* harmony import */ var _mixins_colorable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/colorable */ "./node_modules/vuetify/lib/mixins/colorable/index.js");
+/* harmony import */ var _mixins_dependent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../mixins/dependent */ "./node_modules/vuetify/lib/mixins/dependent/index.js");
+/* harmony import */ var _mixins_overlayable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../mixins/overlayable */ "./node_modules/vuetify/lib/mixins/overlayable/index.js");
+/* harmony import */ var _mixins_ssr_bootable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../mixins/ssr-bootable */ "./node_modules/vuetify/lib/mixins/ssr-bootable/index.js");
+/* harmony import */ var _mixins_themeable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../mixins/themeable */ "./node_modules/vuetify/lib/mixins/themeable/index.js");
+/* harmony import */ var _directives_click_outside__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../directives/click-outside */ "./node_modules/vuetify/lib/directives/click-outside/index.js");
+/* harmony import */ var _directives_resize__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../directives/resize */ "./node_modules/vuetify/lib/directives/resize/index.js");
+/* harmony import */ var _directives_touch__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../directives/touch */ "./node_modules/vuetify/lib/directives/touch/index.js");
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../util/helpers */ "./node_modules/vuetify/lib/util/helpers.js");
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../util/mixins */ "./node_modules/vuetify/lib/util/mixins.js");
+// Styles
+ // Components
+
+ // Mixins
+
+
+
+
+
+
+ // Directives
+
+
+
+ // Utilities
+
+
+
+const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_12__["default"])(Object(_mixins_applicationable__WEBPACK_IMPORTED_MODULE_2__["default"])('left', ['isActive', 'isMobile', 'miniVariant', 'expandOnHover', 'permanent', 'right', 'temporary', 'width']), _mixins_colorable__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_dependent__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_overlayable__WEBPACK_IMPORTED_MODULE_5__["default"], _mixins_ssr_bootable__WEBPACK_IMPORTED_MODULE_6__["default"], _mixins_themeable__WEBPACK_IMPORTED_MODULE_7__["default"]);
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (baseMixins.extend({
+  name: 'v-navigation-drawer',
+
+  provide() {
+    return {
+      isInNav: this.tag === 'nav'
+    };
+  },
+
+  directives: {
+    ClickOutside: _directives_click_outside__WEBPACK_IMPORTED_MODULE_8__["default"],
+    Resize: _directives_resize__WEBPACK_IMPORTED_MODULE_9__["default"],
+    Touch: _directives_touch__WEBPACK_IMPORTED_MODULE_10__["default"]
+  },
+  props: {
+    bottom: Boolean,
+    clipped: Boolean,
+    disableResizeWatcher: Boolean,
+    disableRouteWatcher: Boolean,
+    expandOnHover: Boolean,
+    floating: Boolean,
+    height: {
+      type: [Number, String],
+
+      default() {
+        return this.app ? '100vh' : '100%';
+      }
+
+    },
+    miniVariant: Boolean,
+    miniVariantWidth: {
+      type: [Number, String],
+      default: 56
+    },
+    mobileBreakPoint: {
+      type: [Number, String],
+      default: 1264
+    },
+    permanent: Boolean,
+    right: Boolean,
+    src: {
+      type: [String, Object],
+      default: ''
+    },
+    stateless: Boolean,
+    tag: {
+      type: String,
+
+      default() {
+        return this.app ? 'nav' : 'aside';
+      }
+
+    },
+    temporary: Boolean,
+    touchless: Boolean,
+    width: {
+      type: [Number, String],
+      default: 256
+    },
+    value: null
+  },
+  data: () => ({
+    isMouseover: false,
+    touchArea: {
+      left: 0,
+      right: 0
+    },
+    stackMinZIndex: 6
+  }),
+  computed: {
+    /**
+     * Used for setting an app value from a dynamic
+     * property. Called from applicationable.js
+     */
+    applicationProperty() {
+      return this.right ? 'right' : 'left';
+    },
+
+    classes() {
+      return {
+        'v-navigation-drawer': true,
+        'v-navigation-drawer--absolute': this.absolute,
+        'v-navigation-drawer--bottom': this.bottom,
+        'v-navigation-drawer--clipped': this.clipped,
+        'v-navigation-drawer--close': !this.isActive,
+        'v-navigation-drawer--fixed': !this.absolute && (this.app || this.fixed),
+        'v-navigation-drawer--floating': this.floating,
+        'v-navigation-drawer--is-mobile': this.isMobile,
+        'v-navigation-drawer--is-mouseover': this.isMouseover,
+        'v-navigation-drawer--mini-variant': this.isMiniVariant,
+        'v-navigation-drawer--custom-mini-variant': Number(this.miniVariantWidth) !== 56,
+        'v-navigation-drawer--open': this.isActive,
+        'v-navigation-drawer--open-on-hover': this.expandOnHover,
+        'v-navigation-drawer--right': this.right,
+        'v-navigation-drawer--temporary': this.temporary,
+        ...this.themeClasses
+      };
+    },
+
+    computedMaxHeight() {
+      if (!this.hasApp) return null;
+      const computedMaxHeight = this.$vuetify.application.bottom + this.$vuetify.application.footer + this.$vuetify.application.bar;
+      if (!this.clipped) return computedMaxHeight;
+      return computedMaxHeight + this.$vuetify.application.top;
+    },
+
+    computedTop() {
+      if (!this.hasApp) return 0;
+      let computedTop = this.$vuetify.application.bar;
+      computedTop += this.clipped ? this.$vuetify.application.top : 0;
+      return computedTop;
+    },
+
+    computedTransform() {
+      if (this.isActive) return 0;
+      if (this.isBottom) return 100;
+      return this.right ? 100 : -100;
+    },
+
+    computedWidth() {
+      return this.isMiniVariant ? this.miniVariantWidth : this.width;
+    },
+
+    hasApp() {
+      return this.app && !this.isMobile && !this.temporary;
+    },
+
+    isBottom() {
+      return this.bottom && this.isMobile;
+    },
+
+    isMiniVariant() {
+      return !this.expandOnHover && this.miniVariant || this.expandOnHover && !this.isMouseover;
+    },
+
+    isMobile() {
+      return !this.stateless && !this.permanent && this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10);
+    },
+
+    reactsToClick() {
+      return !this.stateless && !this.permanent && (this.isMobile || this.temporary);
+    },
+
+    reactsToMobile() {
+      return this.app && !this.disableResizeWatcher && !this.permanent && !this.stateless && !this.temporary;
+    },
+
+    reactsToResize() {
+      return !this.disableResizeWatcher && !this.stateless;
+    },
+
+    reactsToRoute() {
+      return !this.disableRouteWatcher && !this.stateless && (this.temporary || this.isMobile);
+    },
+
+    showOverlay() {
+      return this.isActive && (this.isMobile || this.temporary);
+    },
+
+    styles() {
+      const translate = this.isBottom ? 'translateY' : 'translateX';
+      const styles = {
+        height: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_11__["convertToUnit"])(this.height),
+        top: !this.isBottom ? Object(_util_helpers__WEBPACK_IMPORTED_MODULE_11__["convertToUnit"])(this.computedTop) : 'auto',
+        maxHeight: this.computedMaxHeight != null ? `calc(100% - ${Object(_util_helpers__WEBPACK_IMPORTED_MODULE_11__["convertToUnit"])(this.computedMaxHeight)})` : undefined,
+        transform: `${translate}(${Object(_util_helpers__WEBPACK_IMPORTED_MODULE_11__["convertToUnit"])(this.computedTransform, '%')})`,
+        width: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_11__["convertToUnit"])(this.computedWidth)
+      };
+      return styles;
+    }
+
+  },
+  watch: {
+    $route: 'onRouteChange',
+
+    isActive(val) {
+      this.$emit('input', val);
+    },
+
+    /**
+     * When mobile changes, adjust the active state
+     * only when there has been a previous value
+     */
+    isMobile(val, prev) {
+      !val && this.isActive && !this.temporary && this.removeOverlay();
+      if (prev == null || !this.reactsToResize || !this.reactsToMobile) return;
+      this.isActive = !val;
+    },
+
+    permanent(val) {
+      // If enabling prop enable the drawer
+      if (val) this.isActive = true;
+    },
+
+    showOverlay(val) {
+      if (val) this.genOverlay();else this.removeOverlay();
+    },
+
+    value(val) {
+      if (this.permanent) return;
+
+      if (val == null) {
+        this.init();
+        return;
+      }
+
+      if (val !== this.isActive) this.isActive = val;
+    },
+
+    expandOnHover: 'updateMiniVariant',
+
+    isMouseover(val) {
+      this.updateMiniVariant(!val);
+    }
+
+  },
+
+  beforeMount() {
+    this.init();
+  },
+
+  methods: {
+    calculateTouchArea() {
+      const parent = this.$el.parentNode;
+      if (!parent) return;
+      const parentRect = parent.getBoundingClientRect();
+      this.touchArea = {
+        left: parentRect.left + 50,
+        right: parentRect.right - 50
+      };
+    },
+
+    closeConditional() {
+      return this.isActive && !this._isDestroyed && this.reactsToClick;
+    },
+
+    genAppend() {
+      return this.genPosition('append');
+    },
+
+    genBackground() {
+      const props = {
+        height: '100%',
+        width: '100%',
+        src: this.src
+      };
+      const image = this.$scopedSlots.img ? this.$scopedSlots.img(props) : this.$createElement(_VImg_VImg__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        props
+      });
+      return this.$createElement('div', {
+        staticClass: 'v-navigation-drawer__image'
+      }, [image]);
+    },
+
+    genDirectives() {
+      const directives = [{
+        name: 'click-outside',
+        value: () => this.isActive = false,
+        args: {
+          closeConditional: this.closeConditional,
+          include: this.getOpenDependentElements
+        }
+      }];
+
+      if (!this.touchless && !this.stateless) {
+        directives.push({
+          name: 'touch',
+          value: {
+            parent: true,
+            left: this.swipeLeft,
+            right: this.swipeRight
+          }
+        });
+      }
+
+      return directives;
+    },
+
+    genListeners() {
+      const on = {
+        transitionend: e => {
+          if (e.target !== e.currentTarget) return;
+          this.$emit('transitionend', e); // IE11 does not support new Event('resize')
+
+          const resizeEvent = document.createEvent('UIEvents');
+          resizeEvent.initUIEvent('resize', true, false, window, 0);
+          window.dispatchEvent(resizeEvent);
+        }
+      };
+
+      if (this.miniVariant) {
+        on.click = () => this.$emit('update:mini-variant', false);
+      }
+
+      if (this.expandOnHover) {
+        on.mouseenter = () => this.isMouseover = true;
+
+        on.mouseleave = () => this.isMouseover = false;
+      }
+
+      return on;
+    },
+
+    genPosition(name) {
+      const slot = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_11__["getSlot"])(this, name);
+      if (!slot) return slot;
+      return this.$createElement('div', {
+        staticClass: `v-navigation-drawer__${name}`
+      }, slot);
+    },
+
+    genPrepend() {
+      return this.genPosition('prepend');
+    },
+
+    genContent() {
+      return this.$createElement('div', {
+        staticClass: 'v-navigation-drawer__content'
+      }, this.$slots.default);
+    },
+
+    genBorder() {
+      return this.$createElement('div', {
+        staticClass: 'v-navigation-drawer__border'
+      });
+    },
+
+    init() {
+      if (this.permanent) {
+        this.isActive = true;
+      } else if (this.stateless || this.value != null) {
+        this.isActive = this.value;
+      } else if (!this.temporary) {
+        this.isActive = !this.isMobile;
+      }
+    },
+
+    onRouteChange() {
+      if (this.reactsToRoute && this.closeConditional()) {
+        this.isActive = false;
+      }
+    },
+
+    swipeLeft(e) {
+      if (this.isActive && this.right) return;
+      this.calculateTouchArea();
+      if (Math.abs(e.touchendX - e.touchstartX) < 100) return;
+      if (this.right && e.touchstartX >= this.touchArea.right) this.isActive = true;else if (!this.right && this.isActive) this.isActive = false;
+    },
+
+    swipeRight(e) {
+      if (this.isActive && !this.right) return;
+      this.calculateTouchArea();
+      if (Math.abs(e.touchendX - e.touchstartX) < 100) return;
+      if (!this.right && e.touchstartX <= this.touchArea.left) this.isActive = true;else if (this.right && this.isActive) this.isActive = false;
+    },
+
+    /**
+     * Update the application layout
+     */
+    updateApplication() {
+      if (!this.isActive || this.isMobile || this.temporary || !this.$el) return 0;
+      const width = Number(this.computedWidth);
+      return isNaN(width) ? this.$el.clientWidth : width;
+    },
+
+    updateMiniVariant(val) {
+      if (this.miniVariant !== val) this.$emit('update:mini-variant', val);
+    }
+
+  },
+
+  render(h) {
+    const children = [this.genPrepend(), this.genContent(), this.genAppend(), this.genBorder()];
+    if (this.src || Object(_util_helpers__WEBPACK_IMPORTED_MODULE_11__["getSlot"])(this, 'img')) children.unshift(this.genBackground());
+    return h(this.tag, this.setBackgroundColor(this.color, {
+      class: this.classes,
+      style: this.styles,
+      directives: this.genDirectives(),
+      on: this.genListeners()
+    }), children);
+  }
+
+}));
+//# sourceMappingURL=VNavigationDrawer.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VNavigationDrawer/index.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VNavigationDrawer/index.js ***!
+  \************************************************************************/
+/*! exports provided: VNavigationDrawer, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VNavigationDrawer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VNavigationDrawer */ "./node_modules/vuetify/lib/components/VNavigationDrawer/VNavigationDrawer.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VNavigationDrawer", function() { return _VNavigationDrawer__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_VNavigationDrawer__WEBPACK_IMPORTED_MODULE_0__["default"]);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VOverlay/VOverlay.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VOverlay/VOverlay.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_components_VOverlay_VOverlay_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VOverlay/VOverlay.sass */ "./node_modules/vuetify/src/components/VOverlay/VOverlay.sass");
+/* harmony import */ var _src_components_VOverlay_VOverlay_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VOverlay_VOverlay_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mixins_colorable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../mixins/colorable */ "./node_modules/vuetify/lib/mixins/colorable/index.js");
+/* harmony import */ var _mixins_themeable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/themeable */ "./node_modules/vuetify/lib/mixins/themeable/index.js");
+/* harmony import */ var _mixins_toggleable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../mixins/toggleable */ "./node_modules/vuetify/lib/mixins/toggleable/index.js");
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util/mixins */ "./node_modules/vuetify/lib/util/mixins.js");
+// Styles
+ // Mixins
+
+
+
+ // Utilities
+
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_4__["default"])(_mixins_colorable__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_themeable__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_toggleable__WEBPACK_IMPORTED_MODULE_3__["default"]).extend({
+  name: 'v-overlay',
+  props: {
+    absolute: Boolean,
+    color: {
+      type: String,
+      default: '#212121'
+    },
+    dark: {
+      type: Boolean,
+      default: true
+    },
+    opacity: {
+      type: [Number, String],
+      default: 0.46
+    },
+    value: {
+      default: true
+    },
+    zIndex: {
+      type: [Number, String],
+      default: 5
+    }
+  },
+  computed: {
+    __scrim() {
+      const data = this.setBackgroundColor(this.color, {
+        staticClass: 'v-overlay__scrim',
+        style: {
+          opacity: this.computedOpacity
+        }
+      });
+      return this.$createElement('div', data);
+    },
+
+    classes() {
+      return {
+        'v-overlay--absolute': this.absolute,
+        'v-overlay--active': this.isActive,
+        ...this.themeClasses
+      };
+    },
+
+    computedOpacity() {
+      return Number(this.isActive ? this.opacity : 0);
+    },
+
+    styles() {
+      return {
+        zIndex: this.zIndex
+      };
+    }
+
+  },
+  methods: {
+    genContent() {
+      return this.$createElement('div', {
+        staticClass: 'v-overlay__content'
+      }, this.$slots.default);
+    }
+
+  },
+
+  render(h) {
+    const children = [this.__scrim];
+    if (this.isActive) children.push(this.genContent());
+    return h('div', {
+      staticClass: 'v-overlay',
+      class: this.classes,
+      style: this.styles
+    }, children);
+  }
+
+}));
+//# sourceMappingURL=VOverlay.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VOverlay/index.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VOverlay/index.js ***!
+  \***************************************************************/
+/*! exports provided: VOverlay, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VOverlay__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VOverlay */ "./node_modules/vuetify/lib/components/VOverlay/VOverlay.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VOverlay", function() { return _VOverlay__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_VOverlay__WEBPACK_IMPORTED_MODULE_0__["default"]);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
 /***/ "./node_modules/vuetify/lib/components/VProgressCircular/VProgressCircular.js":
 /*!************************************************************************************!*\
   !*** ./node_modules/vuetify/lib/components/VProgressCircular/VProgressCircular.js ***!
@@ -94676,6 +97229,92 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vuetify/lib/components/VResponsive/VResponsive.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VResponsive/VResponsive.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_components_VResponsive_VResponsive_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VResponsive/VResponsive.sass */ "./node_modules/vuetify/src/components/VResponsive/VResponsive.sass");
+/* harmony import */ var _src_components_VResponsive_VResponsive_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VResponsive_VResponsive_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mixins_measurable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/measurable */ "./node_modules/vuetify/lib/mixins/measurable/index.js");
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/mixins */ "./node_modules/vuetify/lib/util/mixins.js");
+ // Mixins
+
+ // Utils
+
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__["default"])(_mixins_measurable__WEBPACK_IMPORTED_MODULE_1__["default"]).extend({
+  name: 'v-responsive',
+  props: {
+    aspectRatio: [String, Number]
+  },
+  computed: {
+    computedAspectRatio() {
+      return Number(this.aspectRatio);
+    },
+
+    aspectStyle() {
+      return this.computedAspectRatio ? {
+        paddingBottom: 1 / this.computedAspectRatio * 100 + '%'
+      } : undefined;
+    },
+
+    __cachedSizer() {
+      if (!this.aspectStyle) return [];
+      return this.$createElement('div', {
+        style: this.aspectStyle,
+        staticClass: 'v-responsive__sizer'
+      });
+    }
+
+  },
+  methods: {
+    genContent() {
+      return this.$createElement('div', {
+        staticClass: 'v-responsive__content'
+      }, this.$slots.default);
+    }
+
+  },
+
+  render(h) {
+    return h('div', {
+      staticClass: 'v-responsive',
+      style: this.measurableStyles,
+      on: this.$listeners
+    }, [this.__cachedSizer, this.genContent()]);
+  }
+
+}));
+//# sourceMappingURL=VResponsive.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VResponsive/index.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VResponsive/index.js ***!
+  \******************************************************************/
+/*! exports provided: VResponsive, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VResponsive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VResponsive */ "./node_modules/vuetify/lib/components/VResponsive/VResponsive.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VResponsive", function() { return _VResponsive__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_VResponsive__WEBPACK_IMPORTED_MODULE_0__["default"]);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
 /***/ "./node_modules/vuetify/lib/components/VSheet/VSheet.js":
 /*!**************************************************************!*\
   !*** ./node_modules/vuetify/lib/components/VSheet/VSheet.js ***!
@@ -94759,6 +97398,771 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = (_VSheet__WEBPACK_IMPORTED_MODULE_0__["default"]);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VToolbar/VToolbar.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VToolbar/VToolbar.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_components_VToolbar_VToolbar_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VToolbar/VToolbar.sass */ "./node_modules/vuetify/src/components/VToolbar/VToolbar.sass");
+/* harmony import */ var _src_components_VToolbar_VToolbar_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VToolbar_VToolbar_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _VSheet_VSheet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../VSheet/VSheet */ "./node_modules/vuetify/lib/components/VSheet/VSheet.js");
+/* harmony import */ var _VImg_VImg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../VImg/VImg */ "./node_modules/vuetify/lib/components/VImg/VImg.js");
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/helpers */ "./node_modules/vuetify/lib/util/helpers.js");
+/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util/console */ "./node_modules/vuetify/lib/util/console.js");
+// Styles
+ // Extensions
+
+ // Components
+
+ // Utilities
+
+
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (_VSheet_VSheet__WEBPACK_IMPORTED_MODULE_1__["default"].extend({
+  name: 'v-toolbar',
+  props: {
+    absolute: Boolean,
+    bottom: Boolean,
+    collapse: Boolean,
+    dense: Boolean,
+    extended: Boolean,
+    extensionHeight: {
+      default: 48,
+      type: [Number, String]
+    },
+    flat: Boolean,
+    floating: Boolean,
+    prominent: Boolean,
+    short: Boolean,
+    src: {
+      type: [String, Object],
+      default: ''
+    },
+    tag: {
+      type: String,
+      default: 'header'
+    },
+    tile: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data: () => ({
+    isExtended: false
+  }),
+  computed: {
+    computedHeight() {
+      const height = this.computedContentHeight;
+      if (!this.isExtended) return height;
+      const extensionHeight = parseInt(this.extensionHeight);
+      return this.isCollapsed ? height : height + (!isNaN(extensionHeight) ? extensionHeight : 0);
+    },
+
+    computedContentHeight() {
+      if (this.height) return parseInt(this.height);
+      if (this.isProminent && this.dense) return 96;
+      if (this.isProminent && this.short) return 112;
+      if (this.isProminent) return 128;
+      if (this.dense) return 48;
+      if (this.short || this.$vuetify.breakpoint.smAndDown) return 56;
+      return 64;
+    },
+
+    classes() {
+      return { ..._VSheet_VSheet__WEBPACK_IMPORTED_MODULE_1__["default"].options.computed.classes.call(this),
+        'v-toolbar': true,
+        'v-toolbar--absolute': this.absolute,
+        'v-toolbar--bottom': this.bottom,
+        'v-toolbar--collapse': this.collapse,
+        'v-toolbar--collapsed': this.isCollapsed,
+        'v-toolbar--dense': this.dense,
+        'v-toolbar--extended': this.isExtended,
+        'v-toolbar--flat': this.flat,
+        'v-toolbar--floating': this.floating,
+        'v-toolbar--prominent': this.isProminent
+      };
+    },
+
+    isCollapsed() {
+      return this.collapse;
+    },
+
+    isProminent() {
+      return this.prominent;
+    },
+
+    styles() {
+      return { ...this.measurableStyles,
+        height: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__["convertToUnit"])(this.computedHeight)
+      };
+    }
+
+  },
+
+  created() {
+    const breakingProps = [['app', '<v-app-bar app>'], ['manual-scroll', '<v-app-bar :value="false">'], ['clipped-left', '<v-app-bar clipped-left>'], ['clipped-right', '<v-app-bar clipped-right>'], ['inverted-scroll', '<v-app-bar inverted-scroll>'], ['scroll-off-screen', '<v-app-bar scroll-off-screen>'], ['scroll-target', '<v-app-bar scroll-target>'], ['scroll-threshold', '<v-app-bar scroll-threshold>'], ['card', '<v-app-bar flat>']];
+    /* istanbul ignore next */
+
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) Object(_util_console__WEBPACK_IMPORTED_MODULE_4__["breaking"])(original, replacement, this);
+    });
+  },
+
+  methods: {
+    genBackground() {
+      const props = {
+        height: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__["convertToUnit"])(this.computedHeight),
+        src: this.src
+      };
+      const image = this.$scopedSlots.img ? this.$scopedSlots.img({
+        props
+      }) : this.$createElement(_VImg_VImg__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        props
+      });
+      return this.$createElement('div', {
+        staticClass: 'v-toolbar__image'
+      }, [image]);
+    },
+
+    genContent() {
+      return this.$createElement('div', {
+        staticClass: 'v-toolbar__content',
+        style: {
+          height: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__["convertToUnit"])(this.computedContentHeight)
+        }
+      }, Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__["getSlot"])(this));
+    },
+
+    genExtension() {
+      return this.$createElement('div', {
+        staticClass: 'v-toolbar__extension',
+        style: {
+          height: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__["convertToUnit"])(this.extensionHeight)
+        }
+      }, Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__["getSlot"])(this, 'extension'));
+    }
+
+  },
+
+  render(h) {
+    this.isExtended = this.extended || !!this.$scopedSlots.extension;
+    const children = [this.genContent()];
+    const data = this.setBackgroundColor(this.color, {
+      class: this.classes,
+      style: this.styles,
+      on: this.$listeners
+    });
+    if (this.isExtended) children.push(this.genExtension());
+    if (this.src || this.$scopedSlots.img) children.unshift(this.genBackground());
+    return h(this.tag, data, children);
+  }
+
+}));
+//# sourceMappingURL=VToolbar.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VToolbar/index.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VToolbar/index.js ***!
+  \***************************************************************/
+/*! exports provided: VToolbar, VToolbarItems, VToolbarTitle, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VToolbarItems", function() { return VToolbarItems; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VToolbarTitle", function() { return VToolbarTitle; });
+/* harmony import */ var _VToolbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VToolbar */ "./node_modules/vuetify/lib/components/VToolbar/VToolbar.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VToolbar", function() { return _VToolbar__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/helpers */ "./node_modules/vuetify/lib/util/helpers.js");
+// Components
+ // Utilities
+
+
+const VToolbarTitle = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_1__["createSimpleFunctional"])('v-toolbar__title');
+const VToolbarItems = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_1__["createSimpleFunctional"])('v-toolbar__items');
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  $_vuetify_subcomponents: {
+    VToolbar: _VToolbar__WEBPACK_IMPORTED_MODULE_0__["default"],
+    VToolbarItems,
+    VToolbarTitle
+  }
+});
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/transitions/createTransition.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/transitions/createTransition.js ***!
+  \*****************************************************************************/
+/*! exports provided: createSimpleTransition, createJavascriptTransition */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSimpleTransition", function() { return createSimpleTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createJavascriptTransition", function() { return createJavascriptTransition; });
+/* harmony import */ var _util_mergeData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../util/mergeData */ "./node_modules/vuetify/lib/util/mergeData.js");
+
+
+function mergeTransitions(dest = [], ...transitions) {
+  /* eslint-disable-next-line no-array-constructor */
+  return Array().concat(dest, ...transitions);
+}
+
+function createSimpleTransition(name, origin = 'top center 0', mode) {
+  return {
+    name,
+    functional: true,
+    props: {
+      group: {
+        type: Boolean,
+        default: false
+      },
+      hideOnLeave: {
+        type: Boolean,
+        default: false
+      },
+      leaveAbsolute: {
+        type: Boolean,
+        default: false
+      },
+      mode: {
+        type: String,
+        default: mode
+      },
+      origin: {
+        type: String,
+        default: origin
+      }
+    },
+
+    render(h, context) {
+      const tag = `transition${context.props.group ? '-group' : ''}`;
+      const data = {
+        props: {
+          name,
+          mode: context.props.mode
+        },
+        on: {
+          beforeEnter(el) {
+            el.style.transformOrigin = context.props.origin;
+            el.style.webkitTransformOrigin = context.props.origin;
+          }
+
+        }
+      };
+
+      if (context.props.leaveAbsolute) {
+        data.on.leave = mergeTransitions(data.on.leave, el => el.style.position = 'absolute');
+      }
+
+      if (context.props.hideOnLeave) {
+        data.on.leave = mergeTransitions(data.on.leave, el => el.style.display = 'none');
+      }
+
+      return h(tag, Object(_util_mergeData__WEBPACK_IMPORTED_MODULE_0__["default"])(context.data, data), context.children);
+    }
+
+  };
+}
+function createJavascriptTransition(name, functions, mode = 'in-out') {
+  return {
+    name,
+    functional: true,
+    props: {
+      mode: {
+        type: String,
+        default: mode
+      }
+    },
+
+    render(h, context) {
+      return h('transition', Object(_util_mergeData__WEBPACK_IMPORTED_MODULE_0__["default"])(context.data, {
+        props: {
+          name
+        },
+        on: functions
+      }), context.children);
+    }
+
+  };
+}
+//# sourceMappingURL=createTransition.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/transitions/expand-transition.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/transitions/expand-transition.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../util/helpers */ "./node_modules/vuetify/lib/util/helpers.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function (expandedParentClass = '', x = false) {
+  const sizeProperty = x ? 'width' : 'height';
+  const offsetProperty = `offset${Object(_util_helpers__WEBPACK_IMPORTED_MODULE_0__["upperFirst"])(sizeProperty)}`;
+  return {
+    beforeEnter(el) {
+      el._parent = el.parentNode;
+      el._initialStyle = {
+        transition: el.style.transition,
+        visibility: el.style.visibility,
+        overflow: el.style.overflow,
+        [sizeProperty]: el.style[sizeProperty]
+      };
+    },
+
+    enter(el) {
+      const initialStyle = el._initialStyle;
+      const offset = `${el[offsetProperty]}px`;
+      el.style.setProperty('transition', 'none', 'important');
+      el.style.visibility = 'hidden';
+      el.style.visibility = initialStyle.visibility;
+      el.style.overflow = 'hidden';
+      el.style[sizeProperty] = '0';
+      void el.offsetHeight; // force reflow
+
+      el.style.transition = initialStyle.transition;
+
+      if (expandedParentClass && el._parent) {
+        el._parent.classList.add(expandedParentClass);
+      }
+
+      requestAnimationFrame(() => {
+        el.style[sizeProperty] = offset;
+      });
+    },
+
+    afterEnter: resetStyles,
+    enterCancelled: resetStyles,
+
+    leave(el) {
+      el._initialStyle = {
+        transition: '',
+        visibility: '',
+        overflow: el.style.overflow,
+        [sizeProperty]: el.style[sizeProperty]
+      };
+      el.style.overflow = 'hidden';
+      el.style[sizeProperty] = `${el[offsetProperty]}px`;
+      void el.offsetHeight; // force reflow
+
+      requestAnimationFrame(() => el.style[sizeProperty] = '0');
+    },
+
+    afterLeave,
+    leaveCancelled: afterLeave
+  };
+
+  function afterLeave(el) {
+    if (expandedParentClass && el._parent) {
+      el._parent.classList.remove(expandedParentClass);
+    }
+
+    resetStyles(el);
+  }
+
+  function resetStyles(el) {
+    const size = el._initialStyle[sizeProperty];
+    el.style.overflow = el._initialStyle.overflow;
+    if (size != null) el.style[sizeProperty] = size;
+    delete el._initialStyle;
+  }
+});
+//# sourceMappingURL=expand-transition.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/transitions/index.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/transitions/index.js ***!
+  \******************************************************************/
+/*! exports provided: VCarouselTransition, VCarouselReverseTransition, VTabTransition, VTabReverseTransition, VMenuTransition, VFabTransition, VDialogTransition, VDialogBottomTransition, VFadeTransition, VScaleTransition, VScrollXTransition, VScrollXReverseTransition, VScrollYTransition, VScrollYReverseTransition, VSlideXTransition, VSlideXReverseTransition, VSlideYTransition, VSlideYReverseTransition, VExpandTransition, VExpandXTransition, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VCarouselTransition", function() { return VCarouselTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VCarouselReverseTransition", function() { return VCarouselReverseTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VTabTransition", function() { return VTabTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VTabReverseTransition", function() { return VTabReverseTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VMenuTransition", function() { return VMenuTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VFabTransition", function() { return VFabTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VDialogTransition", function() { return VDialogTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VDialogBottomTransition", function() { return VDialogBottomTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VFadeTransition", function() { return VFadeTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VScaleTransition", function() { return VScaleTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VScrollXTransition", function() { return VScrollXTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VScrollXReverseTransition", function() { return VScrollXReverseTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VScrollYTransition", function() { return VScrollYTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VScrollYReverseTransition", function() { return VScrollYReverseTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VSlideXTransition", function() { return VSlideXTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VSlideXReverseTransition", function() { return VSlideXReverseTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VSlideYTransition", function() { return VSlideYTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VSlideYReverseTransition", function() { return VSlideYReverseTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VExpandTransition", function() { return VExpandTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VExpandXTransition", function() { return VExpandXTransition; });
+/* harmony import */ var _createTransition__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createTransition */ "./node_modules/vuetify/lib/components/transitions/createTransition.js");
+/* harmony import */ var _expand_transition__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./expand-transition */ "./node_modules/vuetify/lib/components/transitions/expand-transition.js");
+
+ // Component specific transitions
+
+const VCarouselTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('carousel-transition');
+const VCarouselReverseTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('carousel-reverse-transition');
+const VTabTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('tab-transition');
+const VTabReverseTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('tab-reverse-transition');
+const VMenuTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('menu-transition');
+const VFabTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('fab-transition', 'center center', 'out-in'); // Generic transitions
+
+const VDialogTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('dialog-transition');
+const VDialogBottomTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('dialog-bottom-transition');
+const VFadeTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('fade-transition');
+const VScaleTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('scale-transition');
+const VScrollXTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('scroll-x-transition');
+const VScrollXReverseTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('scroll-x-reverse-transition');
+const VScrollYTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('scroll-y-transition');
+const VScrollYReverseTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('scroll-y-reverse-transition');
+const VSlideXTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('slide-x-transition');
+const VSlideXReverseTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('slide-x-reverse-transition');
+const VSlideYTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('slide-y-transition');
+const VSlideYReverseTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createSimpleTransition"])('slide-y-reverse-transition'); // Javascript transitions
+
+const VExpandTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createJavascriptTransition"])('expand-transition', Object(_expand_transition__WEBPACK_IMPORTED_MODULE_1__["default"])());
+const VExpandXTransition = Object(_createTransition__WEBPACK_IMPORTED_MODULE_0__["createJavascriptTransition"])('expand-x-transition', Object(_expand_transition__WEBPACK_IMPORTED_MODULE_1__["default"])('', true));
+/* harmony default export */ __webpack_exports__["default"] = ({
+  $_vuetify_subcomponents: {
+    VCarouselTransition,
+    VCarouselReverseTransition,
+    VDialogTransition,
+    VDialogBottomTransition,
+    VFabTransition,
+    VFadeTransition,
+    VMenuTransition,
+    VScaleTransition,
+    VScrollXTransition,
+    VScrollXReverseTransition,
+    VScrollYTransition,
+    VScrollYReverseTransition,
+    VSlideXTransition,
+    VSlideXReverseTransition,
+    VSlideYTransition,
+    VSlideYReverseTransition,
+    VTabReverseTransition,
+    VTabTransition,
+    VExpandTransition,
+    VExpandXTransition
+  }
+});
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/directives/click-outside/index.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/vuetify/lib/directives/click-outside/index.js ***!
+  \********************************************************************/
+/*! exports provided: ClickOutside, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClickOutside", function() { return ClickOutside; });
+function closeConditional() {
+  return false;
+}
+
+function directive(e, el, binding) {
+  // Args may not always be supplied
+  binding.args = binding.args || {}; // If no closeConditional was supplied assign a default
+
+  const isActive = binding.args.closeConditional || closeConditional; // The include element callbacks below can be expensive
+  // so we should avoid calling them when we're not active.
+  // Explicitly check for false to allow fallback compatibility
+  // with non-toggleable components
+
+  if (!e || isActive(e) === false) return; // If click was triggered programmaticaly (domEl.click()) then
+  // it shouldn't be treated as click-outside
+  // Chrome/Firefox support isTrusted property
+  // IE/Edge support pointerType property (empty if not triggered
+  // by pointing device)
+
+  if ('isTrusted' in e && !e.isTrusted || 'pointerType' in e && !e.pointerType) return; // Check if additional elements were passed to be included in check
+  // (click must be outside all included elements, if any)
+
+  const elements = (binding.args.include || (() => []))(); // Add the root element for the component this directive was defined on
+
+
+  elements.push(el); // Check if it's a click outside our elements, and then if our callback returns true.
+  // Non-toggleable components should take action in their callback and return falsy.
+  // Toggleable can return true if it wants to deactivate.
+  // Note that, because we're in the capture phase, this callback will occur before
+  // the bubbling click event on any outside elements.
+
+  !elements.some(el => el.contains(e.target)) && setTimeout(() => {
+    isActive(e) && binding.value && binding.value(e);
+  }, 0);
+}
+
+const ClickOutside = {
+  // [data-app] may not be found
+  // if using bind, inserted makes
+  // sure that the root element is
+  // available, iOS does not support
+  // clicks on body
+  inserted(el, binding) {
+    const onClick = e => directive(e, el, binding); // iOS does not recognize click events on document
+    // or body, this is the entire purpose of the v-app
+    // component and [data-app], stop removing this
+
+
+    const app = document.querySelector('[data-app]') || document.body; // This is only for unit tests
+
+    app.addEventListener('click', onClick, true);
+    el._clickOutside = onClick;
+  },
+
+  unbind(el) {
+    if (!el._clickOutside) return;
+    const app = document.querySelector('[data-app]') || document.body; // This is only for unit tests
+
+    app && app.removeEventListener('click', el._clickOutside, true);
+    delete el._clickOutside;
+  }
+
+};
+/* harmony default export */ __webpack_exports__["default"] = (ClickOutside);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/directives/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/vuetify/lib/directives/index.js ***!
+  \******************************************************/
+/*! exports provided: ClickOutside, Intersect, Mutate, Resize, Ripple, Scroll, Touch */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _click_outside__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./click-outside */ "./node_modules/vuetify/lib/directives/click-outside/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ClickOutside", function() { return _click_outside__WEBPACK_IMPORTED_MODULE_0__["ClickOutside"]; });
+
+/* harmony import */ var _intersect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./intersect */ "./node_modules/vuetify/lib/directives/intersect/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Intersect", function() { return _intersect__WEBPACK_IMPORTED_MODULE_1__["Intersect"]; });
+
+/* harmony import */ var _mutate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mutate */ "./node_modules/vuetify/lib/directives/mutate/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Mutate", function() { return _mutate__WEBPACK_IMPORTED_MODULE_2__["Mutate"]; });
+
+/* harmony import */ var _resize__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./resize */ "./node_modules/vuetify/lib/directives/resize/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Resize", function() { return _resize__WEBPACK_IMPORTED_MODULE_3__["Resize"]; });
+
+/* harmony import */ var _ripple__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ripple */ "./node_modules/vuetify/lib/directives/ripple/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Ripple", function() { return _ripple__WEBPACK_IMPORTED_MODULE_4__["Ripple"]; });
+
+/* harmony import */ var _scroll__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./scroll */ "./node_modules/vuetify/lib/directives/scroll/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Scroll", function() { return _scroll__WEBPACK_IMPORTED_MODULE_5__["Scroll"]; });
+
+/* harmony import */ var _touch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./touch */ "./node_modules/vuetify/lib/directives/touch/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Touch", function() { return _touch__WEBPACK_IMPORTED_MODULE_6__["Touch"]; });
+
+
+
+
+
+
+
+
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/directives/intersect/index.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/vuetify/lib/directives/intersect/index.js ***!
+  \****************************************************************/
+/*! exports provided: Intersect, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Intersect", function() { return Intersect; });
+function inserted(el, binding) {
+  const modifiers = binding.modifiers ||
+  /* istanbul ignore next */
+  {};
+  const value = binding.value;
+  const isObject = typeof value === 'object';
+  const callback = isObject ? value.handler : value;
+  const observer = new IntersectionObserver((entries = [], observer) => {
+    /* istanbul ignore if */
+    if (!el._observe) return; // Just in case, should never fire
+    // If is not quiet or has already been
+    // initted, invoke the user callback
+
+    if (callback && (!modifiers.quiet || el._observe.init)) {
+      const isIntersecting = Boolean(entries.find(entry => entry.isIntersecting));
+      callback(entries, observer, isIntersecting);
+    } // If has already been initted and
+    // has the once modifier, unbind
+
+
+    if (el._observe.init && modifiers.once) unbind(el); // Otherwise, mark the observer as initted
+    else el._observe.init = true;
+  }, value.options || {});
+  el._observe = {
+    init: false,
+    observer
+  };
+  observer.observe(el);
+}
+
+function unbind(el) {
+  /* istanbul ignore if */
+  if (!el._observe) return;
+
+  el._observe.observer.unobserve(el);
+
+  delete el._observe;
+}
+
+const Intersect = {
+  inserted,
+  unbind
+};
+/* harmony default export */ __webpack_exports__["default"] = (Intersect);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/directives/mutate/index.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/vuetify/lib/directives/mutate/index.js ***!
+  \*************************************************************/
+/*! exports provided: Mutate, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Mutate", function() { return Mutate; });
+function inserted(el, binding) {
+  const modifiers = binding.modifiers ||
+  /* istanbul ignore next */
+  {};
+  const value = binding.value;
+  const isObject = typeof value === 'object';
+  const callback = isObject ? value.handler : value;
+  const {
+    once,
+    ...modifierKeys
+  } = modifiers;
+  const hasModifiers = Object.keys(modifierKeys).length > 0;
+  const hasOptions = isObject && value.options; // Options take top priority
+
+  const options = hasOptions ? value.options : hasModifiers // If we have modifiers, use only those provided
+  ? {
+    attributes: modifierKeys.attr,
+    childList: modifierKeys.child,
+    subtree: modifierKeys.sub,
+    characterData: modifierKeys.char // Defaults to everything on
+
+  } : {
+    attributes: true,
+    childList: true,
+    subtree: true,
+    characterData: true
+  };
+  const observer = new MutationObserver((mutationsList, observer) => {
+    /* istanbul ignore if */
+    if (!el._mutate) return; // Just in case, should never fire
+
+    callback(mutationsList, observer); // If has the once modifier, unbind
+
+    once && unbind(el);
+  });
+  observer.observe(el, options);
+  el._mutate = {
+    observer
+  };
+}
+
+function unbind(el) {
+  /* istanbul ignore if */
+  if (!el._mutate) return;
+
+  el._mutate.observer.disconnect();
+
+  delete el._mutate;
+}
+
+const Mutate = {
+  inserted,
+  unbind
+};
+/* harmony default export */ __webpack_exports__["default"] = (Mutate);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/directives/resize/index.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/vuetify/lib/directives/resize/index.js ***!
+  \*************************************************************/
+/*! exports provided: Resize, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Resize", function() { return Resize; });
+function inserted(el, binding) {
+  const callback = binding.value;
+  const options = binding.options || {
+    passive: true
+  };
+  window.addEventListener('resize', callback, options);
+  el._onResize = {
+    callback,
+    options
+  };
+
+  if (!binding.modifiers || !binding.modifiers.quiet) {
+    callback();
+  }
+}
+
+function unbind(el) {
+  if (!el._onResize) return;
+  const {
+    callback,
+    options
+  } = el._onResize;
+  window.removeEventListener('resize', callback, options);
+  delete el._onResize;
+}
+
+const Resize = {
+  inserted,
+  unbind
+};
+/* harmony default export */ __webpack_exports__["default"] = (Resize);
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -95032,6 +98436,253 @@ const Ripple = {
 
 /***/ }),
 
+/***/ "./node_modules/vuetify/lib/directives/scroll/index.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/vuetify/lib/directives/scroll/index.js ***!
+  \*************************************************************/
+/*! exports provided: Scroll, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Scroll", function() { return Scroll; });
+function inserted(el, binding) {
+  const callback = binding.value;
+  const options = binding.options || {
+    passive: true
+  };
+  const target = binding.arg ? document.querySelector(binding.arg) : window;
+  if (!target) return;
+  target.addEventListener('scroll', callback, options);
+  el._onScroll = {
+    callback,
+    options,
+    target
+  };
+}
+
+function unbind(el) {
+  if (!el._onScroll) return;
+  const {
+    callback,
+    options,
+    target
+  } = el._onScroll;
+  target.removeEventListener('scroll', callback, options);
+  delete el._onScroll;
+}
+
+const Scroll = {
+  inserted,
+  unbind
+};
+/* harmony default export */ __webpack_exports__["default"] = (Scroll);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/directives/touch/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/vuetify/lib/directives/touch/index.js ***!
+  \************************************************************/
+/*! exports provided: Touch, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Touch", function() { return Touch; });
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../util/helpers */ "./node_modules/vuetify/lib/util/helpers.js");
+
+
+const handleGesture = wrapper => {
+  const {
+    touchstartX,
+    touchendX,
+    touchstartY,
+    touchendY
+  } = wrapper;
+  const dirRatio = 0.5;
+  const minDistance = 16;
+  wrapper.offsetX = touchendX - touchstartX;
+  wrapper.offsetY = touchendY - touchstartY;
+
+  if (Math.abs(wrapper.offsetY) < dirRatio * Math.abs(wrapper.offsetX)) {
+    wrapper.left && touchendX < touchstartX - minDistance && wrapper.left(wrapper);
+    wrapper.right && touchendX > touchstartX + minDistance && wrapper.right(wrapper);
+  }
+
+  if (Math.abs(wrapper.offsetX) < dirRatio * Math.abs(wrapper.offsetY)) {
+    wrapper.up && touchendY < touchstartY - minDistance && wrapper.up(wrapper);
+    wrapper.down && touchendY > touchstartY + minDistance && wrapper.down(wrapper);
+  }
+};
+
+function touchstart(event, wrapper) {
+  const touch = event.changedTouches[0];
+  wrapper.touchstartX = touch.clientX;
+  wrapper.touchstartY = touch.clientY;
+  wrapper.start && wrapper.start(Object.assign(event, wrapper));
+}
+
+function touchend(event, wrapper) {
+  const touch = event.changedTouches[0];
+  wrapper.touchendX = touch.clientX;
+  wrapper.touchendY = touch.clientY;
+  wrapper.end && wrapper.end(Object.assign(event, wrapper));
+  handleGesture(wrapper);
+}
+
+function touchmove(event, wrapper) {
+  const touch = event.changedTouches[0];
+  wrapper.touchmoveX = touch.clientX;
+  wrapper.touchmoveY = touch.clientY;
+  wrapper.move && wrapper.move(Object.assign(event, wrapper));
+}
+
+function createHandlers(value) {
+  const wrapper = {
+    touchstartX: 0,
+    touchstartY: 0,
+    touchendX: 0,
+    touchendY: 0,
+    touchmoveX: 0,
+    touchmoveY: 0,
+    offsetX: 0,
+    offsetY: 0,
+    left: value.left,
+    right: value.right,
+    up: value.up,
+    down: value.down,
+    start: value.start,
+    move: value.move,
+    end: value.end
+  };
+  return {
+    touchstart: e => touchstart(e, wrapper),
+    touchend: e => touchend(e, wrapper),
+    touchmove: e => touchmove(e, wrapper)
+  };
+}
+
+function inserted(el, binding, vnode) {
+  const value = binding.value;
+  const target = value.parent ? el.parentElement : el;
+  const options = value.options || {
+    passive: true
+  }; // Needed to pass unit tests
+
+  if (!target) return;
+  const handlers = createHandlers(binding.value);
+  target._touchHandlers = Object(target._touchHandlers);
+  target._touchHandlers[vnode.context._uid] = handlers;
+  Object(_util_helpers__WEBPACK_IMPORTED_MODULE_0__["keys"])(handlers).forEach(eventName => {
+    target.addEventListener(eventName, handlers[eventName], options);
+  });
+}
+
+function unbind(el, binding, vnode) {
+  const target = binding.value.parent ? el.parentElement : el;
+  if (!target || !target._touchHandlers) return;
+  const handlers = target._touchHandlers[vnode.context._uid];
+  Object(_util_helpers__WEBPACK_IMPORTED_MODULE_0__["keys"])(handlers).forEach(eventName => {
+    target.removeEventListener(eventName, handlers[eventName]);
+  });
+  delete target._touchHandlers[vnode.context._uid];
+}
+
+const Touch = {
+  inserted,
+  unbind
+};
+/* harmony default export */ __webpack_exports__["default"] = (Touch);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/mixins/applicationable/index.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/vuetify/lib/mixins/applicationable/index.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return applicationable; });
+/* harmony import */ var _positionable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../positionable */ "./node_modules/vuetify/lib/mixins/positionable/index.js");
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/mixins */ "./node_modules/vuetify/lib/util/mixins.js");
+ // Util
+
+
+function applicationable(value, events = []) {
+  /* @vue/component */
+  return Object(_util_mixins__WEBPACK_IMPORTED_MODULE_1__["default"])(Object(_positionable__WEBPACK_IMPORTED_MODULE_0__["factory"])(['absolute', 'fixed'])).extend({
+    name: 'applicationable',
+    props: {
+      app: Boolean
+    },
+    computed: {
+      applicationProperty() {
+        return value;
+      }
+
+    },
+    watch: {
+      // If previous value was app
+      // reset the provided prop
+      app(x, prev) {
+        prev ? this.removeApplication(true) : this.callUpdate();
+      },
+
+      applicationProperty(newVal, oldVal) {
+        this.$vuetify.application.unregister(this._uid, oldVal);
+      }
+
+    },
+
+    activated() {
+      this.callUpdate();
+    },
+
+    created() {
+      for (let i = 0, length = events.length; i < length; i++) {
+        this.$watch(events[i], this.callUpdate);
+      }
+
+      this.callUpdate();
+    },
+
+    mounted() {
+      this.callUpdate();
+    },
+
+    deactivated() {
+      this.removeApplication();
+    },
+
+    destroyed() {
+      this.removeApplication();
+    },
+
+    methods: {
+      callUpdate() {
+        if (!this.app) return;
+        this.$vuetify.application.register(this._uid, this.applicationProperty, this.updateApplication());
+      },
+
+      removeApplication(force = false) {
+        if (!force && !this.app) return;
+        this.$vuetify.application.unregister(this._uid, this.applicationProperty);
+      },
+
+      updateApplication: () => 0
+    }
+  });
+}
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
 /***/ "./node_modules/vuetify/lib/mixins/binds-attrs/index.js":
 /*!**************************************************************!*\
   !*** ./node_modules/vuetify/lib/mixins/binds-attrs/index.js ***!
@@ -95080,6 +98731,72 @@ function makeWatcher(property) {
     });
   }
 
+}));
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/mixins/bootable/index.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/vuetify/lib/mixins/bootable/index.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../util/console */ "./node_modules/vuetify/lib/util/console.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+// Utilities
+ // Types
+
+
+/**
+ * Bootable
+ * @mixin
+ *
+ * Used to add lazy content functionality to components
+ * Looks for change in "isActive" to automatically boot
+ * Otherwise can be set manually
+ */
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend().extend({
+  name: 'bootable',
+  props: {
+    eager: Boolean
+  },
+  data: () => ({
+    isBooted: false
+  }),
+  computed: {
+    hasContent() {
+      return this.isBooted || this.eager || this.isActive;
+    }
+
+  },
+  watch: {
+    isActive() {
+      this.isBooted = true;
+    }
+
+  },
+
+  created() {
+    /* istanbul ignore next */
+    if ('lazy' in this.$attrs) {
+      Object(_util_console__WEBPACK_IMPORTED_MODULE_0__["removed"])('lazy', this);
+    }
+  },
+
+  methods: {
+    showLazyContent(content) {
+      return this.hasContent && content ? content() : [this.$createElement()];
+    }
+
+  }
 }));
 //# sourceMappingURL=index.js.map
 
@@ -95171,6 +98888,89 @@ function isCssColor(color) {
       }
 
       return data;
+    }
+
+  }
+}));
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/mixins/dependent/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/vuetify/lib/mixins/dependent/index.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../util/mixins */ "./node_modules/vuetify/lib/util/mixins.js");
+
+
+function searchChildren(children) {
+  const results = [];
+
+  for (let index = 0; index < children.length; index++) {
+    const child = children[index];
+
+    if (child.isActive && child.isDependent) {
+      results.push(child);
+    } else {
+      results.push(...searchChildren(child.$children));
+    }
+  }
+
+  return results;
+}
+/* @vue/component */
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_0__["default"])().extend({
+  name: 'dependent',
+
+  data() {
+    return {
+      closeDependents: true,
+      isActive: false,
+      isDependent: true
+    };
+  },
+
+  watch: {
+    isActive(val) {
+      if (val) return;
+      const openDependents = this.getOpenDependents();
+
+      for (let index = 0; index < openDependents.length; index++) {
+        openDependents[index].isActive = false;
+      }
+    }
+
+  },
+  methods: {
+    getOpenDependents() {
+      if (this.closeDependents) return searchChildren(this.$children);
+      return [];
+    },
+
+    getOpenDependentElements() {
+      const result = [];
+      const openDependents = this.getOpenDependents();
+
+      for (let index = 0; index < openDependents.length; index++) {
+        result.push(...openDependents[index].getClickableDependentElements());
+      }
+
+      return result;
+    },
+
+    getClickableDependentElements() {
+      const result = [this.$el];
+      if (this.$refs.content) result.push(this.$refs.content);
+      if (this.overlay) result.push(this.overlay.$el);
+      result.push(...this.getOpenDependentElements());
+      return result;
     }
 
   }
@@ -95337,6 +99137,215 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vuetify/lib/mixins/overlayable/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/vuetify/lib/mixins/overlayable/index.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_VOverlay__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/VOverlay */ "./node_modules/vuetify/lib/components/VOverlay/index.js");
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/helpers */ "./node_modules/vuetify/lib/util/helpers.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+// Components
+ // Utilities
+
+ // Types
+
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_2___default.a.extend().extend({
+  name: 'overlayable',
+  props: {
+    hideOverlay: Boolean,
+    overlayColor: String,
+    overlayOpacity: [Number, String]
+  },
+
+  data() {
+    return {
+      overlay: null
+    };
+  },
+
+  watch: {
+    hideOverlay(value) {
+      if (!this.isActive) return;
+      if (value) this.removeOverlay();else this.genOverlay();
+    }
+
+  },
+
+  beforeDestroy() {
+    this.removeOverlay();
+  },
+
+  methods: {
+    createOverlay() {
+      const overlay = new _components_VOverlay__WEBPACK_IMPORTED_MODULE_0__["default"]({
+        propsData: {
+          absolute: this.absolute,
+          value: false,
+          color: this.overlayColor,
+          opacity: this.overlayOpacity
+        }
+      });
+      overlay.$mount();
+      const parent = this.absolute ? this.$el.parentNode : document.querySelector('[data-app]');
+      parent && parent.insertBefore(overlay.$el, parent.firstChild);
+      this.overlay = overlay;
+    },
+
+    genOverlay() {
+      this.hideScroll();
+      if (this.hideOverlay) return;
+      if (!this.overlay) this.createOverlay();
+      requestAnimationFrame(() => {
+        if (!this.overlay) return;
+
+        if (this.activeZIndex !== undefined) {
+          this.overlay.zIndex = String(this.activeZIndex - 1);
+        } else if (this.$el) {
+          this.overlay.zIndex = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_1__["getZIndex"])(this.$el);
+        }
+
+        this.overlay.value = true;
+      });
+      return true;
+    },
+
+    /** removeOverlay(false) will not restore the scollbar afterwards */
+    removeOverlay(showScroll = true) {
+      if (this.overlay) {
+        Object(_util_helpers__WEBPACK_IMPORTED_MODULE_1__["addOnceEventListener"])(this.overlay.$el, 'transitionend', () => {
+          if (!this.overlay || !this.overlay.$el || !this.overlay.$el.parentNode || this.overlay.value) return;
+          this.overlay.$el.parentNode.removeChild(this.overlay.$el);
+          this.overlay.$destroy();
+          this.overlay = null;
+        });
+        this.overlay.value = false;
+      }
+
+      showScroll && this.showScroll();
+    },
+
+    scrollListener(e) {
+      if (e.type === 'keydown') {
+        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName) || // https://github.com/vuetifyjs/vuetify/issues/4715
+        e.target.isContentEditable) return;
+        const up = [_util_helpers__WEBPACK_IMPORTED_MODULE_1__["keyCodes"].up, _util_helpers__WEBPACK_IMPORTED_MODULE_1__["keyCodes"].pageup];
+        const down = [_util_helpers__WEBPACK_IMPORTED_MODULE_1__["keyCodes"].down, _util_helpers__WEBPACK_IMPORTED_MODULE_1__["keyCodes"].pagedown];
+
+        if (up.includes(e.keyCode)) {
+          e.deltaY = -1;
+        } else if (down.includes(e.keyCode)) {
+          e.deltaY = 1;
+        } else {
+          return;
+        }
+      }
+
+      if (e.target === this.overlay || e.type !== 'keydown' && e.target === document.body || this.checkPath(e)) e.preventDefault();
+    },
+
+    hasScrollbar(el) {
+      if (!el || el.nodeType !== Node.ELEMENT_NODE) return false;
+      const style = window.getComputedStyle(el);
+      return ['auto', 'scroll'].includes(style.overflowY) && el.scrollHeight > el.clientHeight;
+    },
+
+    shouldScroll(el, delta) {
+      if (el.scrollTop === 0 && delta < 0) return true;
+      return el.scrollTop + el.clientHeight === el.scrollHeight && delta > 0;
+    },
+
+    isInside(el, parent) {
+      if (el === parent) {
+        return true;
+      } else if (el === null || el === document.body) {
+        return false;
+      } else {
+        return this.isInside(el.parentNode, parent);
+      }
+    },
+
+    checkPath(e) {
+      const path = e.path || this.composedPath(e);
+      const delta = e.deltaY;
+
+      if (e.type === 'keydown' && path[0] === document.body) {
+        const dialog = this.$refs.dialog; // getSelection returns null in firefox in some edge cases, can be ignored
+
+        const selected = window.getSelection().anchorNode;
+
+        if (dialog && this.hasScrollbar(dialog) && this.isInside(selected, dialog)) {
+          return this.shouldScroll(dialog, delta);
+        }
+
+        return true;
+      }
+
+      for (let index = 0; index < path.length; index++) {
+        const el = path[index];
+        if (el === document) return true;
+        if (el === document.documentElement) return true;
+        if (el === this.$refs.content) return true;
+        if (this.hasScrollbar(el)) return this.shouldScroll(el, delta);
+      }
+
+      return true;
+    },
+
+    /**
+     * Polyfill for Event.prototype.composedPath
+     */
+    composedPath(e) {
+      if (e.composedPath) return e.composedPath();
+      const path = [];
+      let el = e.target;
+
+      while (el) {
+        path.push(el);
+
+        if (el.tagName === 'HTML') {
+          path.push(document);
+          path.push(window);
+          return path;
+        }
+
+        el = el.parentElement;
+      }
+
+      return path;
+    },
+
+    hideScroll() {
+      if (this.$vuetify.breakpoint.smAndDown) {
+        document.documentElement.classList.add('overflow-y-hidden');
+      } else {
+        Object(_util_helpers__WEBPACK_IMPORTED_MODULE_1__["addPassiveEventListener"])(window, 'wheel', this.scrollListener, {
+          passive: false
+        });
+        window.addEventListener('keydown', this.scrollListener);
+      }
+    },
+
+    showScroll() {
+      document.documentElement.classList.remove('overflow-y-hidden');
+      window.removeEventListener('wheel', this.scrollListener);
+      window.removeEventListener('keydown', this.scrollListener);
+    }
+
+  }
+}));
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
 /***/ "./node_modules/vuetify/lib/mixins/positionable/index.js":
 /*!***************************************************************!*\
   !*** ./node_modules/vuetify/lib/mixins/positionable/index.js ***!
@@ -95394,6 +99403,68 @@ let all = factory().extend({
   }
 })
 /**/
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/mixins/proxyable/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/vuetify/lib/mixins/proxyable/index.js ***!
+  \************************************************************/
+/*! exports provided: factory, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "factory", function() { return factory; });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+
+function factory(prop = 'value', event = 'change') {
+  return vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend({
+    name: 'proxyable',
+    model: {
+      prop,
+      event
+    },
+    props: {
+      [prop]: {
+        required: false
+      }
+    },
+
+    data() {
+      return {
+        internalLazyValue: this[prop]
+      };
+    },
+
+    computed: {
+      internalValue: {
+        get() {
+          return this.internalLazyValue;
+        },
+
+        set(val) {
+          if (val === this.internalLazyValue) return;
+          this.internalLazyValue = val;
+          this.$emit(event, val);
+        }
+
+      }
+    },
+    watch: {
+      [prop](val) {
+        this.internalLazyValue = val;
+      }
+
+    }
+  });
+}
+/* eslint-disable-next-line no-redeclare */
+
+const Proxyable = factory();
+/* harmony default export */ __webpack_exports__["default"] = (Proxyable);
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -95611,6 +99682,119 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vuetify/lib/mixins/scrollable/index.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/vuetify/lib/mixins/scrollable/index.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _directives__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../directives */ "./node_modules/vuetify/lib/directives/index.js");
+/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/console */ "./node_modules/vuetify/lib/util/console.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+// Directives
+ // Utilities
+
+ // Types
+
+
+/**
+ * Scrollable
+ *
+ * Used for monitoring scrolling and
+ * invoking functions based upon
+ * scrolling thresholds being
+ * met.
+ */
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_2___default.a.extend({
+  name: 'scrollable',
+  directives: {
+    Scroll: _directives__WEBPACK_IMPORTED_MODULE_0__["Scroll"]
+  },
+  props: {
+    scrollTarget: String,
+    scrollThreshold: [String, Number]
+  },
+  data: () => ({
+    currentScroll: 0,
+    currentThreshold: 0,
+    isActive: false,
+    isScrollingUp: false,
+    previousScroll: 0,
+    savedScroll: 0,
+    target: null
+  }),
+  computed: {
+    /**
+     * A computed property that returns
+     * whether scrolling features are
+     * enabled or disabled
+     */
+    canScroll() {
+      return typeof window !== 'undefined';
+    },
+
+    /**
+     * The threshold that must be met before
+     * thresholdMet function is invoked
+     */
+    computedScrollThreshold() {
+      return this.scrollThreshold ? Number(this.scrollThreshold) : 300;
+    }
+
+  },
+  watch: {
+    isScrollingUp() {
+      this.savedScroll = this.savedScroll || this.currentScroll;
+    },
+
+    isActive() {
+      this.savedScroll = 0;
+    }
+
+  },
+
+  mounted() {
+    if (this.scrollTarget) {
+      this.target = document.querySelector(this.scrollTarget);
+
+      if (!this.target) {
+        Object(_util_console__WEBPACK_IMPORTED_MODULE_1__["consoleWarn"])(`Unable to locate element with identifier ${this.scrollTarget}`, this);
+      }
+    }
+  },
+
+  methods: {
+    onScroll() {
+      if (!this.canScroll) return;
+      this.previousScroll = this.currentScroll;
+      this.currentScroll = this.target ? this.target.scrollTop : window.pageYOffset;
+      this.isScrollingUp = this.currentScroll < this.previousScroll;
+      this.currentThreshold = Math.abs(this.currentScroll - this.computedScrollThreshold);
+      this.$nextTick(() => {
+        if (Math.abs(this.currentScroll - this.savedScroll) > this.computedScrollThreshold) this.thresholdMet();
+      });
+    },
+
+    /**
+     * The method invoked when
+     * scrolling in any direction
+     * has exceeded the threshold
+     */
+    thresholdMet() {}
+
+  }
+}));
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
 /***/ "./node_modules/vuetify/lib/mixins/sizeable/index.js":
 /*!***********************************************************!*\
   !*** ./node_modules/vuetify/lib/mixins/sizeable/index.js ***!
@@ -95647,6 +99831,48 @@ __webpack_require__.r(__webpack_exports__);
     }
 
   }
+}));
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/mixins/ssr-bootable/index.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/vuetify/lib/mixins/ssr-bootable/index.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+
+/**
+ * SSRBootable
+ *
+ * @mixin
+ *
+ * Used in layout components (drawer, toolbar, content)
+ * to avoid an entry animation when using SSR
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend({
+  name: 'ssr-bootable',
+  data: () => ({
+    isBooted: false
+  }),
+
+  mounted() {
+    // Use setAttribute instead of dataset
+    // because dataset does not work well
+    // with unit tests
+    window.requestAnimationFrame(() => {
+      this.$el.setAttribute('data-booted', 'true');
+      this.isBooted = true;
+    });
+  }
+
 }));
 //# sourceMappingURL=index.js.map
 
@@ -96384,6 +100610,185 @@ function mergeDeep(source = {}, target = {}) {
 
 /***/ }),
 
+/***/ "./node_modules/vuetify/lib/util/mergeData.js":
+/*!****************************************************!*\
+  !*** ./node_modules/vuetify/lib/util/mergeData.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return mergeData; });
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers */ "./node_modules/vuetify/lib/util/helpers.js");
+
+const pattern = {
+  styleList: /;(?![^(]*\))/g,
+  styleProp: /:(.*)/
+};
+
+function parseStyle(style) {
+  const styleMap = {};
+
+  for (const s of style.split(pattern.styleList)) {
+    let [key, val] = s.split(pattern.styleProp);
+    key = key.trim();
+
+    if (!key) {
+      continue;
+    } // May be undefined if the `key: value` pair is incomplete.
+
+
+    if (typeof val === 'string') {
+      val = val.trim();
+    }
+
+    styleMap[Object(_helpers__WEBPACK_IMPORTED_MODULE_0__["camelize"])(key)] = val;
+  }
+
+  return styleMap;
+}
+
+function mergeData() {
+  const mergeTarget = {};
+  let i = arguments.length;
+  let prop;
+  let event; // Allow for variadic argument length.
+
+  while (i--) {
+    // Iterate through the data properties and execute merge strategies
+    // Object.keys eliminates need for hasOwnProperty call
+    for (prop of Object.keys(arguments[i])) {
+      switch (prop) {
+        // Array merge strategy (array concatenation)
+        case 'class':
+        case 'style':
+        case 'directives':
+          if (!arguments[i][prop]) {
+            break;
+          }
+
+          if (!Array.isArray(mergeTarget[prop])) {
+            mergeTarget[prop] = [];
+          }
+
+          if (prop === 'style') {
+            let style;
+
+            if (Array.isArray(arguments[i].style)) {
+              style = arguments[i].style;
+            } else {
+              style = [arguments[i].style];
+            }
+
+            for (let j = 0; j < style.length; j++) {
+              const s = style[j];
+
+              if (typeof s === 'string') {
+                style[j] = parseStyle(s);
+              }
+            }
+
+            arguments[i].style = style;
+          } // Repackaging in an array allows Vue runtime
+          // to merge class/style bindings regardless of type.
+
+
+          mergeTarget[prop] = mergeTarget[prop].concat(arguments[i][prop]);
+          break;
+        // Space delimited string concatenation strategy
+
+        case 'staticClass':
+          if (!arguments[i][prop]) {
+            break;
+          }
+
+          if (mergeTarget[prop] === undefined) {
+            mergeTarget[prop] = '';
+          }
+
+          if (mergeTarget[prop]) {
+            // Not an empty string, so concatenate
+            mergeTarget[prop] += ' ';
+          }
+
+          mergeTarget[prop] += arguments[i][prop].trim();
+          break;
+        // Object, the properties of which to merge via array merge strategy (array concatenation).
+        // Callback merge strategy merges callbacks to the beginning of the array,
+        // so that the last defined callback will be invoked first.
+        // This is done since to mimic how Object.assign merging
+        // uses the last given value to assign.
+
+        case 'on':
+        case 'nativeOn':
+          if (!arguments[i][prop]) {
+            break;
+          }
+
+          if (!mergeTarget[prop]) {
+            mergeTarget[prop] = {};
+          }
+
+          const listeners = mergeTarget[prop];
+
+          for (event of Object.keys(arguments[i][prop] || {})) {
+            // Concat function to array of functions if callback present.
+            if (listeners[event]) {
+              // Insert current iteration data in beginning of merged array.
+              listeners[event] = Array().concat( // eslint-disable-line
+              listeners[event], arguments[i][prop][event]);
+            } else {
+              // Straight assign.
+              listeners[event] = arguments[i][prop][event];
+            }
+          }
+
+          break;
+        // Object merge strategy
+
+        case 'attrs':
+        case 'props':
+        case 'domProps':
+        case 'scopedSlots':
+        case 'staticStyle':
+        case 'hook':
+        case 'transition':
+          if (!arguments[i][prop]) {
+            break;
+          }
+
+          if (!mergeTarget[prop]) {
+            mergeTarget[prop] = {};
+          }
+
+          mergeTarget[prop] = { ...arguments[i][prop],
+            ...mergeTarget[prop]
+          };
+          break;
+        // Reassignment strategy (no merge)
+
+        case 'slot':
+        case 'key':
+        case 'ref':
+        case 'tag':
+        case 'show':
+        case 'keepAlive':
+        default:
+          if (!mergeTarget[prop]) {
+            mergeTarget[prop] = arguments[i][prop];
+          }
+
+      }
+    }
+  }
+
+  return mergeTarget;
+}
+//# sourceMappingURL=mergeData.js.map
+
+/***/ }),
+
 /***/ "./node_modules/vuetify/lib/util/mixins.js":
 /*!*************************************************!*\
   !*** ./node_modules/vuetify/lib/util/mixins.js ***!
@@ -96429,10 +100834,54 @@ function mixins(...args) {
 
 /***/ }),
 
+/***/ "./node_modules/vuetify/src/components/VAppBar/VAppBar.sass":
+/*!******************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VAppBar/VAppBar.sass ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/src/components/VAvatar/VAvatar.sass":
+/*!******************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VAvatar/VAvatar.sass ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./node_modules/vuetify/src/components/VBtn/VBtn.sass":
 /*!************************************************************!*\
   !*** ./node_modules/vuetify/src/components/VBtn/VBtn.sass ***!
   \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/src/components/VContent/VContent.sass":
+/*!********************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VContent/VContent.sass ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/src/components/VFooter/VFooter.sass":
+/*!******************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VFooter/VFooter.sass ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -96451,6 +100900,94 @@ function mixins(...args) {
 
 /***/ }),
 
+/***/ "./node_modules/vuetify/src/components/VImg/VImg.sass":
+/*!************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VImg/VImg.sass ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/src/components/VItemGroup/VItemGroup.sass":
+/*!************************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VItemGroup/VItemGroup.sass ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/src/components/VList/VList.sass":
+/*!**************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VList/VList.sass ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/src/components/VList/VListGroup.sass":
+/*!*******************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VList/VListGroup.sass ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/src/components/VList/VListItem.sass":
+/*!******************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VList/VListItem.sass ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/src/components/VList/VListItemGroup.sass":
+/*!***********************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VList/VListItemGroup.sass ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/src/components/VNavigationDrawer/VNavigationDrawer.sass":
+/*!**************************************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VNavigationDrawer/VNavigationDrawer.sass ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/src/components/VOverlay/VOverlay.sass":
+/*!********************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VOverlay/VOverlay.sass ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./node_modules/vuetify/src/components/VProgressCircular/VProgressCircular.sass":
 /*!**************************************************************************************!*\
   !*** ./node_modules/vuetify/src/components/VProgressCircular/VProgressCircular.sass ***!
@@ -96462,10 +100999,32 @@ function mixins(...args) {
 
 /***/ }),
 
+/***/ "./node_modules/vuetify/src/components/VResponsive/VResponsive.sass":
+/*!**************************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VResponsive/VResponsive.sass ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./node_modules/vuetify/src/components/VSheet/VSheet.sass":
 /*!****************************************************************!*\
   !*** ./node_modules/vuetify/src/components/VSheet/VSheet.sass ***!
   \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/src/components/VToolbar/VToolbar.sass":
+/*!********************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VToolbar/VToolbar.sass ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -96560,6 +101119,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _App_vue_vue_type_template_id_72bd0b33___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=template&id=72bd0b33& */ "./resources/admin/js/App.vue?vue&type=template&id=72bd0b33&");
 /* harmony import */ var _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=script&lang=js& */ "./resources/admin/js/App.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
+/* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vuetify_lib_components_VApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VApp */ "./node_modules/vuetify/lib/components/VApp/index.js");
+/* harmony import */ var vuetify_lib_components_VAppBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VAppBar */ "./node_modules/vuetify/lib/components/VAppBar/index.js");
+/* harmony import */ var vuetify_lib_components_VContent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VContent */ "./node_modules/vuetify/lib/components/VContent/index.js");
+/* harmony import */ var vuetify_lib_components_VFooter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VFooter */ "./node_modules/vuetify/lib/components/VFooter/index.js");
+/* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
+/* harmony import */ var vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VList */ "./node_modules/vuetify/lib/components/VList/index.js");
+/* harmony import */ var vuetify_lib_components_VNavigationDrawer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VNavigationDrawer */ "./node_modules/vuetify/lib/components/VNavigationDrawer/index.js");
+/* harmony import */ var vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VToolbar */ "./node_modules/vuetify/lib/components/VToolbar/index.js");
 
 
 
@@ -96577,6 +101146,24 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null
   
 )
+
+/* vuetify-loader */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VApp: vuetify_lib_components_VApp__WEBPACK_IMPORTED_MODULE_4__["VApp"],VAppBar: vuetify_lib_components_VAppBar__WEBPACK_IMPORTED_MODULE_5__["VAppBar"],VAppBarNavIcon: vuetify_lib_components_VAppBar__WEBPACK_IMPORTED_MODULE_5__["VAppBarNavIcon"],VContent: vuetify_lib_components_VContent__WEBPACK_IMPORTED_MODULE_6__["VContent"],VFooter: vuetify_lib_components_VFooter__WEBPACK_IMPORTED_MODULE_7__["VFooter"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_8__["VIcon"],VList: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_9__["VList"],VListItem: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_9__["VListItem"],VListItemAction: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_9__["VListItemAction"],VListItemContent: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_9__["VListItemContent"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_9__["VListItemTitle"],VNavigationDrawer: vuetify_lib_components_VNavigationDrawer__WEBPACK_IMPORTED_MODULE_10__["VNavigationDrawer"],VToolbarTitle: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_11__["VToolbarTitle"]})
+
 
 /* hot reload */
 if (false) { var api; }
@@ -96692,10 +101279,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 });
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
-  components: {
-    App: _App__WEBPACK_IMPORTED_MODULE_5__["default"]
-  },
   vuetify: new vuetify__WEBPACK_IMPORTED_MODULE_2___default.a(),
+  render: function render(h) {
+    return h(_App__WEBPACK_IMPORTED_MODULE_5__["default"]);
+  },
   router: router
 });
 
@@ -96836,8 +101423,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /mnt/c/Users/Neakit/code/vuetify-laravel-starter/resources/admin/js/entry.js */"./resources/admin/js/entry.js");
-module.exports = __webpack_require__(/*! /mnt/c/Users/Neakit/code/vuetify-laravel-starter/resources/admin/sass/app.scss */"./resources/admin/sass/app.scss");
+__webpack_require__(/*! C:\openServer\OSPanel\domains\vuetify-laravel-starter\resources\admin\js\entry.js */"./resources/admin/js/entry.js");
+module.exports = __webpack_require__(/*! C:\openServer\OSPanel\domains\vuetify-laravel-starter\resources\admin\sass\app.scss */"./resources/admin/sass/app.scss");
 
 
 /***/ })
