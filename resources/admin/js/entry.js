@@ -49,6 +49,13 @@ Vue.use(VueRouter)
 
 import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
+import Models from './pages/Models';
+import Categories from './pages/Categories';
+import Products from './pages/Products';
+
+import AdminLayout from "./layouts/AdminLayout";
+
+import 'vuetify/dist/vuetify.css';
 
 import App from './App';
 
@@ -62,13 +69,50 @@ const router = new VueRouter({
             component: LoginPage
         },
         {
-            path: '/admin/dashboard',
-            name: 'admin-dashboard',
-            component: Dashboard
+            path: '/admin/',
+            name: 'admin',
+            component: AdminLayout,
+            children: [
+                {
+                    path: 'dashboard',
+                    component: Dashboard,
+                    name: 'admin.dashboard',
+                    meta: {
+                        name: 'Главная',
+                        icon: 'mdi-home'
+                    }
+                },
+                {
+                    path: 'products',
+                    component: Products,
+                    name: 'admin.products',
+                    meta: {
+                        name: 'Продукты',
+                        icon: 'mdi-car-door'
+                    }
+                },
+                {
+                    path: 'models',
+                    component: Models,
+                    name: 'admin.models',
+                    meta: {
+                        name: 'Модели',
+                        icon: 'mdi-car-info'
+                    }
+                },
+                {
+                    path: 'categories',
+                    component: Categories,
+                    name: 'admin.categories',
+                    meta: {
+                        name: 'Категории',
+                        icon: 'mdi-car-shift-pattern'
+                    }
+                }
+            ]
         }
     ],
 });
-
 
 new Vue({
     el: '#app',

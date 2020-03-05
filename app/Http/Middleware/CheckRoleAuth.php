@@ -18,21 +18,21 @@ class CheckRoleAuth
     {
         $user = Auth::user();
 
-        if($request->is('admin/dashboard')) {
-            if ((empty($user) || $user->role !== 100) && !($request->ajax())) {
-                return $next($request);
-            } else {
-                return redirect('admin/dashboard');
-            }
-        }
-
-        if (empty($user) || $user->role !== 100) {
-            if($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->back();
-            }
-        }
+//        if($request->is('admin/dashboard')) {
+//            if ((empty($user) || $user->role !== 100) && !($request->ajax())) {
+//                return $next($request);
+//            } else {
+//                return redirect('admin/dashboard');
+//            }
+//        }
+//
+//        if (empty($user) || $user->role !== 100) {
+//            if($request->ajax()) {
+//                return response('Unauthorized.', 401);
+//            } else {
+//                return redirect()->back();
+//            }
+//        }
 
         return $next($request);
     }
