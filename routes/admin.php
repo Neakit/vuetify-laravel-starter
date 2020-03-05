@@ -11,6 +11,11 @@
 |
 */
 
+Route::post('/signin', 'AdminController@authAdmin');
+Route::get('/signout', 'AdminController@logoutAdmin');
+
 Route::get('/{any}', function () {
     return view('admin.app');
 });
+
+

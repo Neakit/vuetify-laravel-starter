@@ -28,6 +28,7 @@
                                     name="login"
                                     prepend-icon="person"
                                     type="text"
+                                    v-model="form.email"
                                 />
 
                                 <v-text-field
@@ -36,12 +37,13 @@
                                     name="password"
                                     prepend-icon="lock"
                                     type="password"
+                                    v-model="form.password"
                                 />
                             </v-form>
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer />
-                            <v-btn color="primary">Login</v-btn>
+                            <v-btn color="primary" @click="signIn">Login</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-col>
@@ -52,8 +54,29 @@
 
 <script>
     export default {
-        props: {
-            source: String,
+        data() {
+            return {
+                form: {
+                    email: '',
+                    password: ''
+                }
+            }
         },
+        methods: {
+            signIn() {
+                axios({
+                    method: 'post',
+                    url: '/admin/signin',
+                    data: {
+                        email: this.form.email,
+                        password: this.form.password
+                    }
+                }).then(res => {
+                    if(res.data.success) {
+                        this.$router.push('dashboard');
+                    }
+                })
+            }
+        }
     }
 </script>

@@ -22,6 +22,17 @@
         >
             <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
             <v-toolbar-title>Admin Panel</v-toolbar-title>
+            <v-spacer></v-spacer>
+
+            <v-btn
+                class="ma-2"
+                tile
+                outlined
+                color="primary"
+                @click="signout"
+            >
+                Exit <v-icon right>mdi-exit-to-app</v-icon>
+            </v-btn>
         </v-app-bar>
         <v-content>
             <router-view></router-view>
@@ -48,6 +59,18 @@
                         icon: child.meta.icon
                     }
                 });
+            }
+        },
+        methods: {
+            signout() {
+                axios({
+                    method: 'get',
+                    url: '/admin/signout'
+                }).then(res => {
+                    if(res.data.success) {
+                        this.$router.push('/admin/login')
+                    }
+                })
             }
         },
         created () {
