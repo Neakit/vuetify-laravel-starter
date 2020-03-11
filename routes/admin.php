@@ -18,4 +18,12 @@ Route::get('/{any}', function () {
     return view('admin.app');
 });
 
+Route::get('get-records/{adminModel}', [
+    'as'   => 'admin.model',
+    'uses' => 'AdminController@getRecords'
+]);
 
+Route::post('{adminModel}/edit/{nId}', [
+    'as'   => 'admin.model.save',
+    'uses' => 'AdminController@postSave',
+]);

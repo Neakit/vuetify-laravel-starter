@@ -3,20 +3,68 @@
         class="ma-2"
         outlined
     >
-        <v-card-title>
-            Категории авто запчастей
-        </v-card-title>
-
         <v-data-table
             :headers="headers"
-            :items="desserts"
-            :items-per-page="5"
+            :items="items"
+            :items-per-page="10"
             class="elevation-1"
-        ></v-data-table>
+        >
+            <template v-slot:top>
+                <v-toolbar flat color="white">
+                    <v-toolbar-title>Категории запчастей</v-toolbar-title>
+                    <v-spacer/>
+                    <v-text-field
+                        v-model="search"
+                        append-icon="mdi-magnify"
+                        label="Search"
+                        single-line
+                        hide-details
+                    />
+                    <v-spacer/>
+                    <v-dialog v-model="dialog" max-width="500px">
+                        <template v-slot:activator="{ on }">
+                            <v-btn color="primary" dark class="mb-2" v-on="on">Создать</v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-title>
+                                <span class="headline">Новая категория</span>
+                            </v-card-title>
+
+                            <v-card-text>
+                                <v-container>
+                                    <v-row>
+                                        <v-col cols="12">
+                                            <v-text-field v-model="editedItem.title" label="Title"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <v-text-field v-model="editedItem.description" label="Description"></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
+
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                                <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-toolbar>
+            </template>
+
+            <template v-slot:item.edit="{ item }">
+                <v-btn variant="primary" @click="editCategory(item)">edit</v-btn>
+            </template>
+            <template v-slot:item.delete="{ item }">
+                <v-btn variant="primary">delete</v-btn>
+            </template>
+        </v-data-table>
 
         <v-card-actions>
-            <v-btn text>Button</v-btn>
-            <v-btn text>Button</v-btn>
+            <v-spacer></v-spacer>
+            <v-btn @click="getCategories">getCategories</v-btn>
+            <v-btn @click="createCategory">Создать</v-btn>
         </v-card-actions>
     </v-card>
 </template>
@@ -25,102 +73,85 @@
     export default {
         data () {
             return {
+                dialog: false,
+                search: '',
+                editedItem: {
+                    id: '',
+                    title: '',
+                    description: ''
+                },
                 headers: [
                     {
-                        text: 'Dessert (100g serving)',
+                        text: 'id',
                         align: 'start',
-                        sortable: false,
-                        value: 'name',
+                        sortable: true,
+                        value: 'id',
                     },
-                    { text: 'Calories', value: 'calories' },
-                    { text: 'Fat (g)', value: 'fat' },
-                    { text: 'Carbs (g)', value: 'carbs' },
-                    { text: 'Protein (g)', value: 'protein' },
-                    { text: 'Iron (%)', value: 'iron' },
+                    { text: 'Название', value: 'title' },
+                    { text: 'Описание', value: 'description' },
+                    { text: 'Создан', value: 'created_at' },
+                    { text: 'edit', value: 'edit'},
+                    { text: 'delete', value: 'delete'},
                 ],
-                desserts: [
-                    {
-                        name: 'Frozen Yogurt',
-                        calories: 159,
-                        fat: 6.0,
-                        carbs: 24,
-                        protein: 4.0,
-                        iron: '1%',
-                    },
-                    {
-                        name: 'Ice cream sandwich',
-                        calories: 237,
-                        fat: 9.0,
-                        carbs: 37,
-                        protein: 4.3,
-                        iron: '1%',
-                    },
-                    {
-                        name: 'Eclair',
-                        calories: 262,
-                        fat: 16.0,
-                        carbs: 23,
-                        protein: 6.0,
-                        iron: '7%',
-                    },
-                    {
-                        name: 'Cupcake',
-                        calories: 305,
-                        fat: 3.7,
-                        carbs: 67,
-                        protein: 4.3,
-                        iron: '8%',
-                    },
-                    {
-                        name: 'Gingerbread',
-                        calories: 356,
-                        fat: 16.0,
-                        carbs: 49,
-                        protein: 3.9,
-                        iron: '16%',
-                    },
-                    {
-                        name: 'Jelly bean',
-                        calories: 375,
-                        fat: 0.0,
-                        carbs: 94,
-                        protein: 0.0,
-                        iron: '0%',
-                    },
-                    {
-                        name: 'Lollipop',
-                        calories: 392,
-                        fat: 0.2,
-                        carbs: 98,
-                        protein: 0,
-                        iron: '2%',
-                    },
-                    {
-                        name: 'Honeycomb',
-                        calories: 408,
-                        fat: 3.2,
-                        carbs: 87,
-                        protein: 6.5,
-                        iron: '45%',
-                    },
-                    {
-                        name: 'Donut',
-                        calories: 452,
-                        fat: 25.0,
-                        carbs: 51,
-                        protein: 4.9,
-                        iron: '22%',
-                    },
-                    {
-                        name: 'KitKat',
-                        calories: 518,
-                        fat: 26.0,
-                        carbs: 65,
-                        protein: 7,
-                        iron: '6%',
-                    },
-                ],
+                items: []
             }
         },
+        watch: {
+            dialog (val) {
+                val || this.close()
+            },
+        },
+        methods: {
+            save() {
+                const data =
+
+                axios({
+                    url: `/admin/categories/edit/${this.editedItem.id}`,
+                    method: 'post',
+                    data: {
+                        title: this.editedItem.title,
+                        description: this.editedItem.description
+                    }
+                }).then(res => {
+                    console.log('res', res)
+                });
+            },
+            createCategory() {
+
+            },
+            editCategory(item) {
+                this.editedItem = Object.assign({}, item);
+                this.dialog = true
+            },
+            close () {
+                this.dialog = false;
+                this.editedItem = Object.assign({}, {
+                    id: '',
+                    title: '',
+                    description: ''
+                })
+            },
+            getCategories() {
+                return axios.get('/admin/get-records/categories', {
+                    params: {
+                        start: 0,
+                        length: 10,
+                        currentPage: 1,
+                        filter: "",
+                        sortRow: "id",
+                        sort: 'desc'
+                    }
+                }).then(res => {
+                    this.items = res.data.data.map(i => {
+                        return {
+                            id: i.id,
+                            title: i.title,
+                            description: i.description,
+                            created_at: i.created_at
+                        }
+                    })
+                })
+            }
+        }
     }
 </script>

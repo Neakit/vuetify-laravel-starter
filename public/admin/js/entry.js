@@ -2047,102 +2047,142 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      dialog: false,
+      search: '',
+      editedItem: {
+        id: '',
+        title: '',
+        description: ''
+      },
       headers: [{
-        text: 'Dessert (100g serving)',
+        text: 'id',
         align: 'start',
-        sortable: false,
-        value: 'name'
+        sortable: true,
+        value: 'id'
       }, {
-        text: 'Calories',
-        value: 'calories'
+        text: 'Название',
+        value: 'title'
       }, {
-        text: 'Fat (g)',
-        value: 'fat'
+        text: 'Описание',
+        value: 'description'
       }, {
-        text: 'Carbs (g)',
-        value: 'carbs'
+        text: 'Создан',
+        value: 'created_at'
       }, {
-        text: 'Protein (g)',
-        value: 'protein'
+        text: 'edit',
+        value: 'edit'
       }, {
-        text: 'Iron (%)',
-        value: 'iron'
+        text: 'delete',
+        value: 'delete'
       }],
-      desserts: [{
-        name: 'Frozen Yogurt',
-        calories: 159,
-        fat: 6.0,
-        carbs: 24,
-        protein: 4.0,
-        iron: '1%'
-      }, {
-        name: 'Ice cream sandwich',
-        calories: 237,
-        fat: 9.0,
-        carbs: 37,
-        protein: 4.3,
-        iron: '1%'
-      }, {
-        name: 'Eclair',
-        calories: 262,
-        fat: 16.0,
-        carbs: 23,
-        protein: 6.0,
-        iron: '7%'
-      }, {
-        name: 'Cupcake',
-        calories: 305,
-        fat: 3.7,
-        carbs: 67,
-        protein: 4.3,
-        iron: '8%'
-      }, {
-        name: 'Gingerbread',
-        calories: 356,
-        fat: 16.0,
-        carbs: 49,
-        protein: 3.9,
-        iron: '16%'
-      }, {
-        name: 'Jelly bean',
-        calories: 375,
-        fat: 0.0,
-        carbs: 94,
-        protein: 0.0,
-        iron: '0%'
-      }, {
-        name: 'Lollipop',
-        calories: 392,
-        fat: 0.2,
-        carbs: 98,
-        protein: 0,
-        iron: '2%'
-      }, {
-        name: 'Honeycomb',
-        calories: 408,
-        fat: 3.2,
-        carbs: 87,
-        protein: 6.5,
-        iron: '45%'
-      }, {
-        name: 'Donut',
-        calories: 452,
-        fat: 25.0,
-        carbs: 51,
-        protein: 4.9,
-        iron: '22%'
-      }, {
-        name: 'KitKat',
-        calories: 518,
-        fat: 26.0,
-        carbs: 65,
-        protein: 7,
-        iron: '6%'
-      }]
+      items: []
     };
+  },
+  watch: {
+    dialog: function dialog(val) {
+      val || this.close();
+    }
+  },
+  methods: {
+    save: function save() {
+      var data = axios({
+        url: "/admin/categories/edit/".concat(this.editedItem.id),
+        method: 'post',
+        data: {
+          title: this.editedItem.title,
+          description: this.editedItem.description
+        }
+      }).then(function (res) {
+        console.log('res', res);
+      });
+    },
+    createCategory: function createCategory() {},
+    editCategory: function editCategory(item) {
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    close: function close() {
+      this.dialog = false;
+      this.editedItem = Object.assign({}, {
+        id: '',
+        title: '',
+        description: ''
+      });
+    },
+    getCategories: function getCategories() {
+      var _this = this;
+
+      return axios.get('/admin/get-records/categories', {
+        params: {
+          start: 0,
+          length: 10,
+          currentPage: 1,
+          filter: "",
+          sortRow: "id",
+          sort: 'desc'
+        }
+      }).then(function (res) {
+        _this.items = res.data.data.map(function (i) {
+          return {
+            id: i.id,
+            title: i.title,
+            description: i.description,
+            created_at: i.created_at
+          };
+        });
+      });
+    }
   }
 });
 
@@ -38014,23 +38054,232 @@ var render = function() {
     "v-card",
     { staticClass: "ma-2", attrs: { outlined: "" } },
     [
-      _c("v-card-title", [_vm._v("\n        Категории авто запчастей\n    ")]),
-      _vm._v(" "),
       _c("v-data-table", {
         staticClass: "elevation-1",
-        attrs: {
-          headers: _vm.headers,
-          items: _vm.desserts,
-          "items-per-page": 5
-        }
+        attrs: { headers: _vm.headers, items: _vm.items, "items-per-page": 10 },
+        scopedSlots: _vm._u([
+          {
+            key: "top",
+            fn: function() {
+              return [
+                _c(
+                  "v-toolbar",
+                  { attrs: { flat: "", color: "white" } },
+                  [
+                    _c("v-toolbar-title", [_vm._v("Категории запчастей")]),
+                    _vm._v(" "),
+                    _c("v-spacer"),
+                    _vm._v(" "),
+                    _c("v-text-field", {
+                      attrs: {
+                        "append-icon": "mdi-magnify",
+                        label: "Search",
+                        "single-line": "",
+                        "hide-details": ""
+                      },
+                      model: {
+                        value: _vm.search,
+                        callback: function($$v) {
+                          _vm.search = $$v
+                        },
+                        expression: "search"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("v-spacer"),
+                    _vm._v(" "),
+                    _c(
+                      "v-dialog",
+                      {
+                        attrs: { "max-width": "500px" },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "activator",
+                            fn: function(ref) {
+                              var on = ref.on
+                              return [
+                                _c(
+                                  "v-btn",
+                                  _vm._g(
+                                    {
+                                      staticClass: "mb-2",
+                                      attrs: { color: "primary", dark: "" }
+                                    },
+                                    on
+                                  ),
+                                  [_vm._v("Создать")]
+                                )
+                              ]
+                            }
+                          }
+                        ]),
+                        model: {
+                          value: _vm.dialog,
+                          callback: function($$v) {
+                            _vm.dialog = $$v
+                          },
+                          expression: "dialog"
+                        }
+                      },
+                      [
+                        _vm._v(" "),
+                        _c(
+                          "v-card",
+                          [
+                            _c("v-card-title", [
+                              _c("span", { staticClass: "headline" }, [
+                                _vm._v("Новая категория")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "v-card-text",
+                              [
+                                _c(
+                                  "v-container",
+                                  [
+                                    _c(
+                                      "v-row",
+                                      [
+                                        _c(
+                                          "v-col",
+                                          { attrs: { cols: "12" } },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Title" },
+                                              model: {
+                                                value: _vm.editedItem.title,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem,
+                                                    "title",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "editedItem.title"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-col",
+                                          { attrs: { cols: "12" } },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Description" },
+                                              model: {
+                                                value:
+                                                  _vm.editedItem.description,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem,
+                                                    "description",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression:
+                                                  "editedItem.description"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-card-actions",
+                              [
+                                _c("v-spacer"),
+                                _vm._v(" "),
+                                _c(
+                                  "v-btn",
+                                  {
+                                    attrs: { color: "blue darken-1", text: "" },
+                                    on: { click: _vm.close }
+                                  },
+                                  [_vm._v("Cancel")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-btn",
+                                  {
+                                    attrs: { color: "blue darken-1", text: "" },
+                                    on: { click: _vm.save }
+                                  },
+                                  [_vm._v("Save")]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "item.edit",
+            fn: function(ref) {
+              var item = ref.item
+              return [
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { variant: "primary" },
+                    on: {
+                      click: function($event) {
+                        return _vm.editCategory(item)
+                      }
+                    }
+                  },
+                  [_vm._v("edit")]
+                )
+              ]
+            }
+          },
+          {
+            key: "item.delete",
+            fn: function(ref) {
+              var item = ref.item
+              return [
+                _c("v-btn", { attrs: { variant: "primary" } }, [
+                  _vm._v("delete")
+                ])
+              ]
+            }
+          }
+        ])
       }),
       _vm._v(" "),
       _c(
         "v-card-actions",
         [
-          _c("v-btn", { attrs: { text: "" } }, [_vm._v("Button")]),
+          _c("v-spacer"),
           _vm._v(" "),
-          _c("v-btn", { attrs: { text: "" } }, [_vm._v("Button")])
+          _c("v-btn", { on: { click: _vm.getCategories } }, [
+            _vm._v("getCategories")
+          ]),
+          _vm._v(" "),
+          _c("v-btn", { on: { click: _vm.createCategory } }, [
+            _vm._v("Создать")
+          ])
         ],
         1
       )
@@ -98556,6 +98805,351 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vuetify/lib/components/VDialog/VDialog.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VDialog/VDialog.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_components_VDialog_VDialog_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/components/VDialog/VDialog.sass */ "./node_modules/vuetify/src/components/VDialog/VDialog.sass");
+/* harmony import */ var _src_components_VDialog_VDialog_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VDialog_VDialog_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _VThemeProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../VThemeProvider */ "./node_modules/vuetify/lib/components/VThemeProvider/index.js");
+/* harmony import */ var _mixins_activatable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/activatable */ "./node_modules/vuetify/lib/mixins/activatable/index.js");
+/* harmony import */ var _mixins_dependent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/dependent */ "./node_modules/vuetify/lib/mixins/dependent/index.js");
+/* harmony import */ var _mixins_detachable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../mixins/detachable */ "./node_modules/vuetify/lib/mixins/detachable/index.js");
+/* harmony import */ var _mixins_overlayable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../mixins/overlayable */ "./node_modules/vuetify/lib/mixins/overlayable/index.js");
+/* harmony import */ var _mixins_returnable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../mixins/returnable */ "./node_modules/vuetify/lib/mixins/returnable/index.js");
+/* harmony import */ var _mixins_stackable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../mixins/stackable */ "./node_modules/vuetify/lib/mixins/stackable/index.js");
+/* harmony import */ var _mixins_toggleable__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../mixins/toggleable */ "./node_modules/vuetify/lib/mixins/toggleable/index.js");
+/* harmony import */ var _directives_click_outside__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../directives/click-outside */ "./node_modules/vuetify/lib/directives/click-outside/index.js");
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../util/mixins */ "./node_modules/vuetify/lib/util/mixins.js");
+/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../util/console */ "./node_modules/vuetify/lib/util/console.js");
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../util/helpers */ "./node_modules/vuetify/lib/util/helpers.js");
+// Styles
+ // Components
+
+ // Mixins
+
+
+
+
+
+
+
+ // Directives
+
+ // Helpers
+
+
+
+
+const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_10__["default"])(_mixins_activatable__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_dependent__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_detachable__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_overlayable__WEBPACK_IMPORTED_MODULE_5__["default"], _mixins_returnable__WEBPACK_IMPORTED_MODULE_6__["default"], _mixins_stackable__WEBPACK_IMPORTED_MODULE_7__["default"], _mixins_toggleable__WEBPACK_IMPORTED_MODULE_8__["default"]);
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["default"] = (baseMixins.extend({
+  name: 'v-dialog',
+  directives: {
+    ClickOutside: _directives_click_outside__WEBPACK_IMPORTED_MODULE_9__["default"]
+  },
+  props: {
+    dark: Boolean,
+    disabled: Boolean,
+    fullscreen: Boolean,
+    light: Boolean,
+    maxWidth: {
+      type: [String, Number],
+      default: 'none'
+    },
+    noClickAnimation: Boolean,
+    origin: {
+      type: String,
+      default: 'center center'
+    },
+    persistent: Boolean,
+    retainFocus: {
+      type: Boolean,
+      default: true
+    },
+    scrollable: Boolean,
+    transition: {
+      type: [String, Boolean],
+      default: 'dialog-transition'
+    },
+    width: {
+      type: [String, Number],
+      default: 'auto'
+    }
+  },
+
+  data() {
+    return {
+      activatedBy: null,
+      animate: false,
+      animateTimeout: -1,
+      isActive: !!this.value,
+      stackMinZIndex: 200
+    };
+  },
+
+  computed: {
+    classes() {
+      return {
+        [`v-dialog ${this.contentClass}`.trim()]: true,
+        'v-dialog--active': this.isActive,
+        'v-dialog--persistent': this.persistent,
+        'v-dialog--fullscreen': this.fullscreen,
+        'v-dialog--scrollable': this.scrollable,
+        'v-dialog--animated': this.animate
+      };
+    },
+
+    contentClasses() {
+      return {
+        'v-dialog__content': true,
+        'v-dialog__content--active': this.isActive
+      };
+    },
+
+    hasActivator() {
+      return Boolean(!!this.$slots.activator || !!this.$scopedSlots.activator);
+    }
+
+  },
+  watch: {
+    isActive(val) {
+      if (val) {
+        this.show();
+        this.hideScroll();
+      } else {
+        this.removeOverlay();
+        this.unbind();
+      }
+    },
+
+    fullscreen(val) {
+      if (!this.isActive) return;
+
+      if (val) {
+        this.hideScroll();
+        this.removeOverlay(false);
+      } else {
+        this.showScroll();
+        this.genOverlay();
+      }
+    }
+
+  },
+
+  created() {
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('full-width')) {
+      Object(_util_console__WEBPACK_IMPORTED_MODULE_11__["removed"])('full-width', this);
+    }
+  },
+
+  beforeMount() {
+    this.$nextTick(() => {
+      this.isBooted = this.isActive;
+      this.isActive && this.show();
+    });
+  },
+
+  beforeDestroy() {
+    if (typeof window !== 'undefined') this.unbind();
+  },
+
+  methods: {
+    animateClick() {
+      this.animate = false; // Needed for when clicking very fast
+      // outside of the dialog
+
+      this.$nextTick(() => {
+        this.animate = true;
+        window.clearTimeout(this.animateTimeout);
+        this.animateTimeout = window.setTimeout(() => this.animate = false, 150);
+      });
+    },
+
+    closeConditional(e) {
+      const target = e.target; // Ignore the click if the dialog is closed or destroyed,
+      // if it was on an element inside the content,
+      // if it was dragged onto the overlay (#6969),
+      // or if this isn't the topmost dialog (#9907)
+
+      return !(this._isDestroyed || !this.isActive || this.$refs.content.contains(target) || this.overlay && target && !this.overlay.$el.contains(target)) && this.activeZIndex >= this.getMaxZIndex();
+    },
+
+    hideScroll() {
+      if (this.fullscreen) {
+        document.documentElement.classList.add('overflow-y-hidden');
+      } else {
+        _mixins_overlayable__WEBPACK_IMPORTED_MODULE_5__["default"].options.methods.hideScroll.call(this);
+      }
+    },
+
+    show() {
+      !this.fullscreen && !this.hideOverlay && this.genOverlay();
+      this.$nextTick(() => {
+        this.$refs.content.focus();
+        this.bind();
+      });
+    },
+
+    bind() {
+      window.addEventListener('focusin', this.onFocusin);
+    },
+
+    unbind() {
+      window.removeEventListener('focusin', this.onFocusin);
+    },
+
+    onClickOutside(e) {
+      this.$emit('click:outside', e);
+
+      if (this.persistent) {
+        this.noClickAnimation || this.animateClick();
+      } else {
+        this.isActive = false;
+      }
+    },
+
+    onKeydown(e) {
+      if (e.keyCode === _util_helpers__WEBPACK_IMPORTED_MODULE_12__["keyCodes"].esc && !this.getOpenDependents().length) {
+        if (!this.persistent) {
+          this.isActive = false;
+          const activator = this.getActivator();
+          this.$nextTick(() => activator && activator.focus());
+        } else if (!this.noClickAnimation) {
+          this.animateClick();
+        }
+      }
+
+      this.$emit('keydown', e);
+    },
+
+    // On focus change, wrap focus to stay inside the dialog
+    // https://github.com/vuetifyjs/vuetify/issues/6892
+    onFocusin(e) {
+      if (!e || !this.retainFocus) return;
+      const target = e.target;
+
+      if (!!target && // It isn't the document or the dialog body
+      ![document, this.$refs.content].includes(target) && // It isn't inside the dialog body
+      !this.$refs.content.contains(target) && // We're the topmost dialog
+      this.activeZIndex >= this.getMaxZIndex() && // It isn't inside a dependent element (like a menu)
+      !this.getOpenDependentElements().some(el => el.contains(target)) // So we must have focused something outside the dialog and its children
+      ) {
+          // Find and focus the first available element inside the dialog
+          const focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+          focusable.length && focusable[0].focus();
+        }
+    },
+
+    genContent() {
+      return this.showLazyContent(() => [this.$createElement(_VThemeProvider__WEBPACK_IMPORTED_MODULE_1__["VThemeProvider"], {
+        props: {
+          root: true,
+          light: this.light,
+          dark: this.dark
+        }
+      }, [this.$createElement('div', {
+        class: this.contentClasses,
+        attrs: {
+          role: 'document',
+          tabindex: this.isActive ? 0 : undefined,
+          ...this.getScopeIdAttrs()
+        },
+        on: {
+          keydown: this.onKeydown
+        },
+        style: {
+          zIndex: this.activeZIndex
+        },
+        ref: 'content'
+      }, [this.genTransition()])])]);
+    },
+
+    genTransition() {
+      const content = this.genInnerContent();
+      if (!this.transition) return content;
+      return this.$createElement('transition', {
+        props: {
+          name: this.transition,
+          origin: this.origin,
+          appear: true
+        }
+      }, [content]);
+    },
+
+    genInnerContent() {
+      const data = {
+        class: this.classes,
+        ref: 'dialog',
+        directives: [{
+          name: 'click-outside',
+          value: this.onClickOutside,
+          args: {
+            closeConditional: this.closeConditional,
+            include: this.getOpenDependentElements
+          }
+        }, {
+          name: 'show',
+          value: this.isActive
+        }],
+        style: {}
+      };
+
+      if (!this.fullscreen) {
+        data.style = {
+          maxWidth: this.maxWidth === 'none' ? undefined : Object(_util_helpers__WEBPACK_IMPORTED_MODULE_12__["convertToUnit"])(this.maxWidth),
+          width: this.width === 'auto' ? undefined : Object(_util_helpers__WEBPACK_IMPORTED_MODULE_12__["convertToUnit"])(this.width)
+        };
+      }
+
+      return this.$createElement('div', data, this.getContentSlot());
+    }
+
+  },
+
+  render(h) {
+    return h('div', {
+      staticClass: 'v-dialog__container',
+      class: {
+        'v-dialog__container--attached': this.attach === '' || this.attach === true || this.attach === 'attach'
+      },
+      attrs: {
+        role: 'dialog'
+      }
+    }, [this.genActivator(), this.genContent()]);
+  }
+
+}));
+//# sourceMappingURL=VDialog.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VDialog/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VDialog/index.js ***!
+  \**************************************************************/
+/*! exports provided: VDialog, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VDialog__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VDialog */ "./node_modules/vuetify/lib/components/VDialog/VDialog.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VDialog", function() { return _VDialog__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_VDialog__WEBPACK_IMPORTED_MODULE_0__["default"]);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
 /***/ "./node_modules/vuetify/lib/components/VDivider/VDivider.js":
 /*!******************************************************************!*\
   !*** ./node_modules/vuetify/lib/components/VDivider/VDivider.js ***!
@@ -109696,6 +110290,17 @@ function rebuildFunctionalSlots(slots, h) {
 
 /***/ }),
 
+/***/ "./node_modules/vuetify/src/components/VDialog/VDialog.sass":
+/*!******************************************************************!*\
+  !*** ./node_modules/vuetify/src/components/VDialog/VDialog.sass ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./node_modules/vuetify/src/components/VDivider/VDivider.sass":
 /*!********************************************************************!*\
   !*** ./node_modules/vuetify/src/components/VDivider/VDivider.sass ***!
@@ -110354,7 +110959,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VBtn */ "./node_modules/vuetify/lib/components/VBtn/index.js");
 /* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
-/* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
+/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
+/* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
+/* harmony import */ var vuetify_lib_components_VDialog__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VDialog */ "./node_modules/vuetify/lib/components/VDialog/index.js");
+/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
+/* harmony import */ var vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VToolbar */ "./node_modules/vuetify/lib/components/VToolbar/index.js");
 
 
 
@@ -110380,7 +110989,16 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardTitle: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardTitle"],VDataTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_6__["VDataTable"]})
+
+
+
+
+
+
+
+
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VCardTitle: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardTitle"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VCol"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VContainer"],VDataTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_7__["VDataTable"],VDialog: vuetify_lib_components_VDialog__WEBPACK_IMPORTED_MODULE_8__["VDialog"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VRow"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_9__["VTextField"],VToolbar: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_10__["VToolbar"],VToolbarTitle: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_10__["VToolbarTitle"]})
 
 
 /* hot reload */

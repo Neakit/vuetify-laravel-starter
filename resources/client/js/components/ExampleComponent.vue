@@ -7,6 +7,7 @@
 
                     <div class="card-body">
                         I'm an example component.
+                        <button @click="getCategories">categories</button>
                     </div>
                 </div>
             </div>
@@ -18,6 +19,14 @@
     export default {
         mounted() {
             console.log('Component mounted.')
+        },
+        methods: {
+            getCategories() {
+                axios.$get('/categories').then(res => {
+                    console.log(res);
+                    debugger
+                })
+            }
         }
     }
 </script>
