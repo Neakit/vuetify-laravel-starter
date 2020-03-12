@@ -61,4 +61,27 @@ class AdminController extends Controller
         return (new AdminModelService($model))->postSave($request, $nId);
     }
 
+    /**
+     * Добавление элемента
+     * @param Request $request
+     * @param string $model
+     * @return array
+     */
+    public function postCreate(Request $request, $model)
+    {
+        return (new AdminModelService($model))->postCreate($request);
+    }
+
+    /**
+     * Удаление элемента
+     * @param Request $request
+     * @param string $model
+     * @param string $nId
+     * @return array
+     */
+    public function postDelete(Request $request, $model, $nId)
+    {
+        return (new AdminModelService($model))->postDelete($request, $nId);
+    }
+
 }

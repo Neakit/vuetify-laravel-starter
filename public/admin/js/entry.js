@@ -2089,19 +2089,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dialog: false,
       search: '',
       editedItem: {
-        id: '',
+        id: 0,
         title: '',
         description: ''
       },
@@ -2134,9 +2128,41 @@ __webpack_require__.r(__webpack_exports__);
       val || this.close();
     }
   },
+  created: function created() {
+    this.getCategories();
+  },
   methods: {
     save: function save() {
-      var data = axios({
+      switch (Boolean(this.editedItem.id)) {
+        case false:
+          this.createCategory();
+          break;
+
+        case true:
+          this.editCategory();
+          break;
+      }
+    },
+    createCategory: function createCategory() {
+      var _this = this;
+
+      axios({
+        url: '/admin/categories/create',
+        method: 'post',
+        data: {
+          title: this.editedItem.title,
+          description: this.editedItem.description
+        }
+      }).then(function (res) {
+        _this.getCategories();
+
+        _this.closeModal();
+      });
+    },
+    editCategory: function editCategory() {
+      var _this2 = this;
+
+      axios({
         url: "/admin/categories/edit/".concat(this.editedItem.id),
         method: 'post',
         data: {
@@ -2144,24 +2170,41 @@ __webpack_require__.r(__webpack_exports__);
           description: this.editedItem.description
         }
       }).then(function (res) {
-        console.log('res', res);
+        _this2.getCategories();
+
+        _this2.closeModal();
       });
     },
-    createCategory: function createCategory() {},
-    editCategory: function editCategory(item) {
+    deleteCategory: function deleteCategory(item) {
+      var _this3 = this;
+
+      axios({
+        url: "/admin/categories/delete/".concat(item.id),
+        method: 'post',
+        data: {
+          title: this.editedItem.title,
+          description: this.editedItem.description
+        }
+      }).then(function (res) {
+        _this3.getCategories();
+
+        _this3.closeModal();
+      });
+    },
+    openModal: function openModal(item) {
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
-    close: function close() {
+    closeModal: function closeModal() {
       this.dialog = false;
       this.editedItem = Object.assign({}, {
-        id: '',
+        id: 0,
         title: '',
         description: ''
       });
     },
     getCategories: function getCategories() {
-      var _this = this;
+      var _this4 = this;
 
       return axios.get('/admin/get-records/categories', {
         params: {
@@ -2173,7 +2216,7 @@ __webpack_require__.r(__webpack_exports__);
           sort: 'desc'
         }
       }).then(function (res) {
-        _this.items = res.data.data.map(function (i) {
+        _this4.items = res.data.data.map(function (i) {
           return {
             id: i.id,
             title: i.title,
@@ -38205,7 +38248,7 @@ var render = function() {
                                   "v-btn",
                                   {
                                     attrs: { color: "blue darken-1", text: "" },
-                                    on: { click: _vm.close }
+                                    on: { click: _vm.closeModal }
                                   },
                                   [_vm._v("Cancel")]
                                 ),
@@ -38245,7 +38288,7 @@ var render = function() {
                     attrs: { variant: "primary" },
                     on: {
                       click: function($event) {
-                        return _vm.editCategory(item)
+                        return _vm.openModal(item)
                       }
                     }
                   },
@@ -38259,30 +38302,23 @@ var render = function() {
             fn: function(ref) {
               var item = ref.item
               return [
-                _c("v-btn", { attrs: { variant: "primary" } }, [
-                  _vm._v("delete")
-                ])
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { variant: "primary" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteCategory(item)
+                      }
+                    }
+                  },
+                  [_vm._v("delete")]
+                )
               ]
             }
           }
         ])
-      }),
-      _vm._v(" "),
-      _c(
-        "v-card-actions",
-        [
-          _c("v-spacer"),
-          _vm._v(" "),
-          _c("v-btn", { on: { click: _vm.getCategories } }, [
-            _vm._v("getCategories")
-          ]),
-          _vm._v(" "),
-          _c("v-btn", { on: { click: _vm.createCategory } }, [
-            _vm._v("Создать")
-          ])
-        ],
-        1
-      )
+      })
     ],
     1
   )
@@ -111375,8 +111411,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /mnt/c/Users/Neakit/code/vuetify-laravel-starter/resources/admin/js/entry.js */"./resources/admin/js/entry.js");
-module.exports = __webpack_require__(/*! /mnt/c/Users/Neakit/code/vuetify-laravel-starter/resources/admin/sass/app.scss */"./resources/admin/sass/app.scss");
+__webpack_require__(/*! C:\openServer\OSPanel\domains\vuetify-laravel-starter\resources\admin\js\entry.js */"./resources/admin/js/entry.js");
+module.exports = __webpack_require__(/*! C:\openServer\OSPanel\domains\vuetify-laravel-starter\resources\admin\sass\app.scss */"./resources/admin/sass/app.scss");
 
 
 /***/ })

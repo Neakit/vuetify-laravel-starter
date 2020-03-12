@@ -58,9 +58,18 @@ class AdminModelService
      * @param Request $request
      * @return array
      */
-//    public function postCreate(Request $request){
-//        return $this->oModel->postCreate($request);
-//    }
+    public function postCreate(Request $request){
+        return $this->oModel->postCreate($request);
+    }
+
+    /**
+     * Удаление элемента
+     * @param Request $request
+     * @return array
+     */
+    public function postDelete(Request $request, $nId){
+        return $this->oModel->postDelete($request, $nId);
+    }
 
     /**
      * Получение массива данных по одному элементу из моделей для вывода в таблицах

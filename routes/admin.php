@@ -27,3 +27,13 @@ Route::post('{adminModel}/edit/{nId}', [
     'as'   => 'admin.model.save',
     'uses' => 'AdminController@postSave',
 ]);
+
+Route::post('{adminModel}/create', [
+    'as'   => 'admin.model.create',
+    'uses' => 'AdminController@postCreate',
+]);
+
+Route::post('{adminModel}/delete/{nId}', [
+    'as'   => 'admin.model.delete',
+    'uses' => 'AdminController@postDelete',
+]);

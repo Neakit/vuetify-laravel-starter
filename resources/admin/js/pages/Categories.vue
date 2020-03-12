@@ -45,7 +45,7 @@
 
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                                <v-btn color="blue darken-1" text @click="closeModal">Cancel</v-btn>
                                 <v-btn color="blue darken-1" text @click="save">Save</v-btn>
                             </v-card-actions>
                         </v-card>
@@ -54,18 +54,12 @@
             </template>
 
             <template v-slot:item.edit="{ item }">
-                <v-btn variant="primary" @click="editCategory(item)">edit</v-btn>
+                <v-btn variant="primary" @click="openModal(item)">edit</v-btn>
             </template>
             <template v-slot:item.delete="{ item }">
-                <v-btn variant="primary">delete</v-btn>
+                <v-btn variant="primary" @click="deleteCategory(item)">delete</v-btn>
             </template>
         </v-data-table>
-
-        <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn @click="getCategories">getCategories</v-btn>
-            <v-btn @click="createCategory">Создать</v-btn>
-        </v-card-actions>
     </v-card>
 </template>
 
@@ -76,7 +70,7 @@
                 dialog: false,
                 search: '',
                 editedItem: {
-                    id: '',
+                    id: 0,
                     title: '',
                     description: ''
                 },
@@ -101,10 +95,38 @@
                 val || this.close()
             },
         },
+
+        created() {
+            this.getCategories();
+        },
+
         methods: {
             save() {
-                const data =
+                switch (Boolean(this.editedItem.id)) {
+                    case false:
+                        this.createCategory();
+                        break;
+                    case true:
+                        this.editCategory();
+                        break;
+                }
+            },
 
+            createCategory() {
+               axios({
+                    url: '/admin/categories/create',
+                    method: 'post',
+                    data: {
+                        title: this.editedItem.title,
+                        description: this.editedItem.description
+                    }
+                }).then(res => {
+                    this.getCategories();
+                    this.closeModal();
+                });
+            },
+
+            editCategory() {
                 axios({
                     url: `/admin/categories/edit/${this.editedItem.id}`,
                     method: 'post',
@@ -113,24 +135,39 @@
                         description: this.editedItem.description
                     }
                 }).then(res => {
-                    console.log('res', res)
+                    this.getCategories();
+                    this.closeModal();
                 });
             },
-            createCategory() {
 
+            deleteCategory(item) {
+                axios({
+                    url: `/admin/categories/delete/${item.id}`,
+                    method: 'post',
+                    data: {
+                        title: this.editedItem.title,
+                        description: this.editedItem.description
+                    }
+                }).then(res => {
+                    this.getCategories();
+                    this.closeModal();
+                });
             },
-            editCategory(item) {
+
+            openModal(item) {
                 this.editedItem = Object.assign({}, item);
                 this.dialog = true
             },
-            close () {
+
+            closeModal() {
                 this.dialog = false;
                 this.editedItem = Object.assign({}, {
-                    id: '',
+                    id: 0,
                     title: '',
                     description: ''
                 })
             },
+
             getCategories() {
                 return axios.get('/admin/get-records/categories', {
                     params: {

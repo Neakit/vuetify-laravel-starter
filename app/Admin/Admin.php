@@ -117,18 +117,44 @@ class Admin {
      * @param Request $request
      * @return array
      */
-    public function postCreate(Request $request){
-        $aData = $this->prepareData($request->input());
-        if (array_get($aData, 'email')) {
-            $aData['login'] = $aData['email'];
-        }
-        $aRes = array_filter($aData, function($key){
-            if (in_array($key, $this->aColumns)){
+    public function postCreate(Request $request) {
+        // $aData = $this->prepareData($request->input());
+        
+        $data = $request->input();
+
+        // if (array_get($data, 'email')) {
+        //     $aData['login'] = $aData['email'];
+        // }
+        $response = array_filter($data, function($key) {
+            if (in_array($key, $this->aColumns)) {
                 return $key;
             }
-        },ARRAY_FILTER_USE_KEY );
-        $id = $this->dbModel->create($aRes)->id;
+        }, ARRAY_FILTER_USE_KEY);
+        $data = $this->dbModel->create($response);
+        
+        return response()->json([
+            'data' => $data,
+            'success' => true
+        ]);
+
         return ['success'=>true, 'id' => $id];
+    }
+
+    /**
+     * Удаление элемента
+     * @param Request $request
+     * @return array
+     */
+    public function postDelete(Request $request, $nId) {
+
+        $model = $this->dbModel->where('id', $nId)->first();
+        $data = $model->delete();
+        
+        return response()->json([
+            'data' => $data,
+            'success' => true
+        ]);
+
     }
 
     /**
