@@ -115,11 +115,11 @@ class Admin {
     /**
      * Добавление элемента
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      */
     public function postCreate(Request $request) {
         // $aData = $this->prepareData($request->input());
-        
+
         $data = $request->input();
 
         // if (array_get($data, 'email')) {
@@ -131,25 +131,23 @@ class Admin {
             }
         }, ARRAY_FILTER_USE_KEY);
         $data = $this->dbModel->create($response);
-        
+
         return response()->json([
             'data' => $data,
             'success' => true
         ]);
-
-        return ['success'=>true, 'id' => $id];
     }
 
     /**
      * Удаление элемента
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      */
     public function postDelete(Request $request, $nId) {
 
         $model = $this->dbModel->where('id', $nId)->first();
         $data = $model->delete();
-        
+
         return response()->json([
             'data' => $data,
             'success' => true
