@@ -58,7 +58,7 @@
                                                 >
                                                     <v-card-actions>
                                                         <v-spacer></v-spacer>
-                                                        <v-icon @click="removeImage({ id: img.id })">close</v-icon>
+                                                        <v-icon @click="removeImage(img)">close</v-icon>
                                                     </v-card-actions>
                                                     <v-img
                                                         class="white--text align-end"
@@ -135,6 +135,8 @@
 </template>
 
 <script>
+    import uniqBy from 'lodash/uniqBy';
+
     export default {
         data () {
             return {
@@ -206,6 +208,9 @@
 
                     this.editedItem.files = this.editedItem.files.map((f, index) => {
                         f.id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                        f.url = URL.createObjectURL(f);
+                        f.itemType ='objectUrl';
+
                         return f;
                     });
                     this.renderPreview();
@@ -216,20 +221,19 @@
             * Render images
             */
             renderPreview() {
-                if(this.editedItem.files.length > 0) {
-                    this.preview = this.editedItem.files.map(f => {
-                        return {
-                            name: f.name,
-                            url: URL.createObjectURL(f),
-                            id: f.id
-                        }
-                    });
-                }
-                this.preview = [...this.preview, ...this.editedItem.images];
+                this.preview = [...this.editedItem.files, ...this.editedItem.images];
+                // console.log(this.preview, this.editedItem.images)
             },
 
-            removeImage({ id }) {
-                this.editedItem.files = this.editedItem.files.filter(f => f.id !== id);
+            removeImage(item) {
+                switch (item.itemType) {
+                    case 'objectUrl':
+                        this.editedItem.files = this.editedItem.files.filter(f => f.id !== item.id);
+                        break;
+                    case 'pathUrl':
+                        this.editedItem.images = this.editedItem.images.filter(f => f.id !== item.id);
+                        break;
+                }
                 this.renderPreview();
             },
 
@@ -270,15 +274,30 @@
             },
 
             editProduct() {
-                axios({
-                    url: `/admin/categories/edit/${this.editedItem.id}`,
-                    method: 'post',
-                    data: {
-                        title: this.editedItem.title,
-                        description: this.editedItem.description
+                let formData = new FormData()
+
+                for(const key in this.editedItem) {
+                    if(key === 'files') {
+                        for(const index in this.editedItem[key]) {
+                            formData.append(`files[${index}]`, this.editedItem[key][index]);
+                        }
+                    } else if(key === 'images') {
+                        const images = this.editedItem[key].map(i => i.name);
+                        images.forEach((name, index)  => {
+                            formData.append(`images[${index}]`, name)
+                        })
+                    } else {
+                        formData.append(key, this.editedItem[key])
                     }
+                }
+
+                axios({
+                    url: `/admin/products/edit/${this.editedItem.id}`,
+                    method: 'post',
+                    config: { headers: {'Content-Type': 'multipart/form-data' }},
+                    data: formData
                 }).then(res => {
-                    this.getCategories();
+                    this.getProducts();
                     this.closeModal();
                 });
             },
@@ -325,11 +344,12 @@
                 }).then(res => {
                     this.items = res.data.data.map(p => {
 
-                        p.images = p.images.map(i => {
+                        p.images = p.images && p.images.map(i => {
                             return {
                                 name: i,
                                 url: `/images/products/${i}`,
-                                id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+                                id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+                                itemType: 'pathUrl'
                             }
                         });
 

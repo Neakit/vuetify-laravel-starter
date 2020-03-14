@@ -2,10 +2,10 @@
 
 namespace App\Admin;
 
-
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 
 class AdminProducts extends Admin
@@ -58,6 +58,76 @@ class AdminProducts extends Admin
 
         $data = $this->dbModel->create($response);
         $data['images'] = $images;
+
+        return response()->json([
+            'data' => $data,
+            'success' => true
+        ]);
+    }
+
+
+    private function deleteFile(String $name)
+    {
+        $file_path = base_path().'/public/images/products/'.$name;
+
+        if(File::exists($file_path)) {
+            File::delete($file_path);
+        }
+    }
+
+
+    /**
+     * Сохранение отредактированных полей
+     * @param Request $request
+     * @param string $nId
+     * @return JsonResponse
+     */
+    public function postSave(Request $request,  $nId) {
+        $data = $request->all();
+        $images = $request->input('images.*');
+        $files = $request->file('files');
+        $model = $this->dbModel->where('id', $nId)->first();
+
+
+
+        if(!is_null($images)) {
+            $storedImages = json_decode($model['images']);
+
+            $fullDiff = array_merge(array_diff($storedImages, $images), array_diff($images, $storedImages));
+
+            if(!empty($fullDiff)) {
+//                dd($images);
+                $images = array_filter($storedImages, function($storedName) use ($fullDiff) {
+                    return !in_array($storedName, $fullDiff);
+                });
+
+
+                foreach ($fullDiff as $name) {
+                    $this->deleteFile($name);
+                }
+            }
+        }
+
+        if(!is_null($files) && !is_null($images)) {
+            foreach ($files as $file) {
+                $name = time()."_".$file->getClientOriginalName();
+                $path = base_path().'/public/images/products';
+                $file->move($path, $name);
+                array_push($images, $name);
+            }
+        }
+
+        $data['images'] = json_encode($images);
+       
+        $response = array_filter($data, function($key) {
+            if (in_array($key, $this->aColumns)) {
+                return $key;
+            }
+        },ARRAY_FILTER_USE_KEY );
+
+        $model->fill($response);
+        $model->save();
+//        $data['images'] = json_decode($data['images']);
 
         return response()->json([
             'data' => $data,
