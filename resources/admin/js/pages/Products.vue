@@ -84,7 +84,7 @@
                                             <v-text-field v-model="editedItem.product_number_inner" label="Внутренний номер"></v-text-field>
                                         </v-col>
                                         <v-col cols="12">
-                                            <v-text-field v-model="editedItem.description" label="Описание"></v-text-field>
+                                            <v-textarea v-model="editedItem.description" label="Описание"></v-textarea>
                                         </v-col>
                                         <v-col cols="12">
                                             <v-text-field type="number" v-model="editedItem.price" label="Цена"></v-text-field>
@@ -101,28 +101,34 @@
                                         <v-col cols="12">
                                             <v-select
                                                 v-model="editedItem.product_model_id"
-                                                :items="selectItems"
+                                                :items="productModels"
                                                 item-text="title"
                                                 item-value="value"
                                                 label="Модель"
                                             />
                                         </v-col>
                                         <v-col cols="12">
-                                            <v-checkbox v-model="editedItem.product_recommend" label="Рекомендовать" />
+                                            <v-checkbox
+                                                :true-value="1"
+                                                :false-value="0"
+                                                v-model="editedItem.product_recommend" label="Рекомендовать" />
                                         </v-col>
                                     </v-row>
                                 </v-container>
+                                <v-card-actions class="pb-2">
+                                    <v-spacer></v-spacer>
+                                    <v-btn color="warning" @click="closeModal">Отмена</v-btn>
+                                    <v-btn color="primary" @click="save">Сохранить</v-btn>
+                                </v-card-actions>
                             </v-card-text>
-
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn color="blue darken-1" text @click="closeModal">Cancel</v-btn>
-                                <v-btn color="blue darken-1" text @click="save">Save</v-btn>
-                            </v-card-actions>
                         </v-card>
                     </v-dialog>
 
                 </v-toolbar>
+            </template>
+
+            <template v-slot:item.product_recommend="{ item }">
+                {{ item.product_recommend ? 'в рекомендациях' : 'нет в рекомендациях' }}
             </template>
 
             <template v-slot:item.edit="{ item }">
@@ -159,8 +165,6 @@
                 confirmDeleteDialog: false,
                 search: '',
 
-
-
                 editedItem: {
                     id: 0,
                     files: [],
@@ -170,9 +174,10 @@
                     product_number_inner: '',
                     description: '',
                     price: 0,
+                    category: null,
                     category_id: null,
                     product_model_id: null,
-                    product_recommend: '0',
+                    product_recommend: 0,
                     images: []
                 },
                 headers: [
@@ -183,8 +188,8 @@
                     { text: 'Внутрений номер', value: 'product_number_inner' },
                     { text: 'Описание', value: 'description' },
                     { text: 'Цена', value: 'price' },
-                    { text: 'Категория', value: 'category_id'},
-                    { text: 'Модель', value: 'product_model_id'},
+                    { text: 'Категория', value: 'category'},
+                    { text: 'Модель', value: 'product_model'},
                     // { text: 'Фото', value: 'images'},
                     { text: 'Рекомендация', value: 'product_recommend'},
                     { text: 'Создан', value: 'created_at' },
@@ -194,7 +199,8 @@
                 items: [],
                 preview: [],
 
-                categories: []
+                categories: [],
+                productModels: []
             }
         },
         watch: {
@@ -211,11 +217,19 @@
                         title: i.title
                     }
                 })
-            })
+            });
+            this.getProductModels().then(res => {
+                this.productModels = res.data.data.map(i => {
+                    return {
+                        value: i.id,
+                        title: i.title
+                    }
+                })
+            });
             this.getProducts();
         },
         methods: {
-            ...mapActions(['getCategories']),
+            ...mapActions(['getCategories', 'getProductModels']),
             /**
              *  preload images
              */
@@ -386,8 +400,10 @@
                             product_number_inner: p.product_number_inner,
                             description: p.description,
                             price: p.price,
+                            category: p.category.title,
                             category_id: p.category_id,
                             product_model_id: p.product_model_id,
+                            product_model: p.product_model.title,
                             images: p.images,
                             product_recommend: p.product_recommend,
                             created_at: p.created_at
@@ -395,8 +411,6 @@
                     })
                 })
             },
-
-
         }
     }
 </script>

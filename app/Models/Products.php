@@ -21,4 +21,14 @@ class Products extends Model
         "product_recommend",
         "images"
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Categories::class);
+    }
+
+    public function productModel()
+    {
+        return $this->belongsTo(ProductModels::class);
+    }
 }

@@ -166,7 +166,7 @@ class AdminProducts extends Admin
         $sortRow = Arr::get($requestParams, 'sortRow', null);
         $sort    = Arr::get($requestParams, 'sort', null);
 
-        $query = $this->dbModel;
+        $query = $this->dbModel::with(['category', 'productModel']);
         if ($filter != null) {
             $i = 0;
             foreach ($this->aFindFields as $field) {

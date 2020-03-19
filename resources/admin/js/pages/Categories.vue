@@ -94,25 +94,28 @@
         },
         watch: {
             dialog (val) {
-                val || this.close()
+                val || this.closeModal()
             },
         },
 
         created() {
-            this.getCategories().then(res => {
-                this.items = res.data.data.map(i => {
-                    return {
-                        id: i.id,
-                        title: i.title,
-                        description: i.description,
-                        created_at: i.created_at
-                    }
-                })
-            })
+            this.getCategories()
         },
 
         methods: {
-            ...mapActions(['getCategories']),
+            ...mapActions({ getCategoriesVuex : 'getCategories'}),
+            getCategories () {
+                this.getCategoriesVuex().then(res => {
+                    this.items = res.data.data.map(i => {
+                        return {
+                            id: i.id,
+                            title: i.title,
+                            description: i.description,
+                            created_at: i.created_at
+                        }
+                    })
+                })
+            },
             save() {
                 switch (Boolean(this.editedItem.id)) {
                     case false:
