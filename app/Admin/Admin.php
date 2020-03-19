@@ -141,6 +141,7 @@ class Admin {
     /**
      * Удаление элемента
      * @param Request $request
+     * @param $nId
      * @return JsonResponse
      */
     public function postDelete(Request $request, $nId) {

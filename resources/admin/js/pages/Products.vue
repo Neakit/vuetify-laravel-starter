@@ -92,7 +92,7 @@
                                         <v-col cols="12">
                                             <v-select
                                                 v-model="editedItem.category_id"
-                                                :items="selectItems"
+                                                :items="categories"
                                                 item-text="title"
                                                 item-value="value"
                                                 label="Категория"
@@ -121,6 +121,7 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
+
                 </v-toolbar>
             </template>
 
@@ -128,14 +129,25 @@
                 <v-btn variant="primary" @click="openModal(item)">edit</v-btn>
             </template>
             <template v-slot:item.delete="{ item }">
-                <v-btn variant="primary" @click="deleteCategory(item)">delete</v-btn>
+                <v-dialog v-model="confirmDeleteDialog" persistent max-width="290">
+                    <v-card>
+                        <v-card-title class="headline">Удаление продукта</v-card-title>
+                        <v-card-text>Вы уверены, что хотите удалить этот продукт?</v-card-text>
+                        <v-card-actions>
+                            <v-btn color="red darken-1" text @click="deleteCategory(item)">Удалить</v-btn>
+                            <v-spacer></v-spacer>
+                                <v-btn color="green darken-1" text @click="confirmDeleteDialog = false">Отмена</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+                <v-btn variant="primary" @click="confirmDeleteDialog = true">delete</v-btn>
             </template>
         </v-data-table>
     </v-card>
 </template>
 
 <script>
-    import uniqBy from 'lodash/uniqBy';
+    import { mapActions } from "vuex";
 
     export default {
         data () {
@@ -144,15 +156,10 @@
                     value => !value || value.size < 8000000 || 'Avatar size should be less than 2 MB!',
                 ],
                 dialog: false,
+                confirmDeleteDialog: false,
                 search: '',
 
-                selectItems: [
-                    { title: 'Florida', value: 1 },
-                    { title: 'Georgia', value: 2 },
-                    { title: 'Nebraska', value: 3 },
-                    { title: 'California', value: 4 },
-                    { title: 'New York', value: 5 },
-                ],
+
 
                 editedItem: {
                     id: 0,
@@ -165,7 +172,7 @@
                     price: 0,
                     category_id: null,
                     product_model_id: null,
-                    product_recommend: '1',
+                    product_recommend: '0',
                     images: []
                 },
                 headers: [
@@ -185,7 +192,9 @@
                     { text: 'delete', value: 'delete'},
                 ],
                 items: [],
-                preview: []
+                preview: [],
+
+                categories: []
             }
         },
         watch: {
@@ -195,10 +204,18 @@
         },
 
         created() {
+            this.getCategories().then(res => {
+                this.categories = res.data.data.map(i => {
+                    return {
+                        value: i.id,
+                        title: i.title
+                    }
+                })
+            })
             this.getProducts();
         },
         methods: {
-
+            ...mapActions(['getCategories']),
             /**
              *  preload images
              */
@@ -277,17 +294,19 @@
                 let formData = new FormData()
 
                 for(const key in this.editedItem) {
-                    if(key === 'files') {
-                        for(const index in this.editedItem[key]) {
-                            formData.append(`files[${index}]`, this.editedItem[key][index]);
-                        }
-                    } else if(key === 'images') {
-                        const images = this.editedItem[key].map(i => i.name);
-                        images.forEach((name, index)  => {
-                            formData.append(`images[${index}]`, name)
-                        })
-                    } else {
-                        formData.append(key, this.editedItem[key])
+                    switch(key) {
+                        case 'files':
+                            for(const index in this.editedItem[key]) {
+                                formData.append(`files[${index}]`, this.editedItem[key][index]);
+                            }
+                            break;
+                        case 'images':
+                            let images = this.editedItem[key].length > 0 && this.editedItem[key].map(i => i.name) || [];
+                            images = JSON.stringify(images);
+                            formData.append('images', images)
+                            break;
+                        default:
+                            formData.append(key, this.editedItem[key])
                     }
                 }
 
@@ -304,15 +323,11 @@
 
             deleteCategory(item) {
                 axios({
-                    url: `/admin/categories/delete/${item.id}`,
-                    method: 'post',
-                    data: {
-                        title: this.editedItem.title,
-                        description: this.editedItem.description
-                    }
+                    url: `/admin/products/delete/${item.id}`,
+                    method: 'get',
                 }).then(res => {
-                    this.getCategories();
-                    this.closeModal();
+                    this.getProducts();
+                    this.confirmDeleteDialog = false;
                 });
             },
 
@@ -326,8 +341,17 @@
                 this.dialog = false;
                 this.editedItem = Object.assign({}, {
                     id: 0,
+                    files: [],
                     title: '',
-                    description: ''
+                    product_number: '',
+                    product_number_replacements: '',
+                    product_number_inner: '',
+                    description: '',
+                    price: 0,
+                    category_id: null,
+                    product_model_id: null,
+                    product_recommend: '1',
+                    images: []
                 })
             },
 
@@ -344,14 +368,14 @@
                 }).then(res => {
                     this.items = res.data.data.map(p => {
 
-                        p.images = p.images && p.images.map(i => {
+                        p.images = p.images !== null && p.images.length > 0 && p.images.map(i => {
                             return {
                                 name: i,
                                 url: `/images/products/${i}`,
                                 id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
                                 itemType: 'pathUrl'
                             }
-                        });
+                        }) || [];
 
                         return {
                             id: p.id ,
@@ -370,7 +394,9 @@
                         }
                     })
                 })
-            }
+            },
+
+
         }
     }
 </script>

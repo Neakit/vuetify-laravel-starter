@@ -64,6 +64,8 @@
 </template>
 
 <script>
+    import { mapActions } from "vuex";
+
     export default {
         data () {
             return {
@@ -97,10 +99,20 @@
         },
 
         created() {
-            this.getCategories();
+            this.getCategories().then(res => {
+                this.items = res.data.data.map(i => {
+                    return {
+                        id: i.id,
+                        title: i.title,
+                        description: i.description,
+                        created_at: i.created_at
+                    }
+                })
+            })
         },
 
         methods: {
+            ...mapActions(['getCategories']),
             save() {
                 switch (Boolean(this.editedItem.id)) {
                     case false:
@@ -143,11 +155,7 @@
             deleteCategory(item) {
                 axios({
                     url: `/admin/categories/delete/${item.id}`,
-                    method: 'post',
-                    data: {
-                        title: this.editedItem.title,
-                        description: this.editedItem.description
-                    }
+                    method: 'get',
                 }).then(res => {
                     this.getCategories();
                     this.closeModal();
@@ -165,28 +173,6 @@
                     id: 0,
                     title: '',
                     description: ''
-                })
-            },
-
-            getCategories() {
-                return axios.get('/admin/get-records/categories', {
-                    params: {
-                        start: 0,
-                        length: 10,
-                        currentPage: 1,
-                        filter: "",
-                        sortRow: "id",
-                        sort: 'desc'
-                    }
-                }).then(res => {
-                    this.items = res.data.data.map(i => {
-                        return {
-                            id: i.id,
-                            title: i.title,
-                            description: i.description,
-                            created_at: i.created_at
-                        }
-                    })
                 })
             }
         }

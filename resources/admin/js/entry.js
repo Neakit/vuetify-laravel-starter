@@ -45,7 +45,8 @@ import VueRouter from "vue-router";
 import Vuetify   from "vuetify";
 
 Vue.use(Vuetify);
-Vue.use(VueRouter)
+Vue.use(VueRouter);
+import store from './store';
 
 import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
@@ -118,5 +119,6 @@ new Vue({
     el: '#app',
     vuetify: new Vuetify(),
     render: (h) => h(App),
-    router
+    router,
+    store
 });

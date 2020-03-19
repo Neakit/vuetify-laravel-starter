@@ -33,7 +33,7 @@ Route::post('{adminModel}/create', [
     'uses' => 'AdminController@postCreate',
 ]);
 
-Route::post('{adminModel}/delete/{nId}', [
+Route::get('{adminModel}/delete/{nId}', [
     'as'   => 'admin.model.delete',
     'uses' => 'AdminController@postDelete',
 ]);
