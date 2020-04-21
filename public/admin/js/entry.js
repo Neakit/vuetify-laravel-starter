@@ -114456,15 +114456,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuetify */ "./node_modules/vuetify/dist/vuetify.js");
 /* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vuetify__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./resources/admin/js/store/index.js");
-/* harmony import */ var _pages_LoginPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/LoginPage */ "./resources/admin/js/pages/LoginPage.vue");
-/* harmony import */ var _pages_Dashboard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/Dashboard */ "./resources/admin/js/pages/Dashboard.vue");
-/* harmony import */ var _pages_Models__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/Models */ "./resources/admin/js/pages/Models.vue");
-/* harmony import */ var _pages_Categories__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/Categories */ "./resources/admin/js/pages/Categories.vue");
-/* harmony import */ var _pages_Products__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/Products */ "./resources/admin/js/pages/Products.vue");
-/* harmony import */ var _layouts_AdminLayout__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./layouts/AdminLayout */ "./resources/admin/js/layouts/AdminLayout.vue");
-/* harmony import */ var vuetify_dist_vuetify_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/dist/vuetify.css */ "./node_modules/vuetify/dist/vuetify.css");
-/* harmony import */ var vuetify_dist_vuetify_css__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(vuetify_dist_vuetify_css__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var vuetify_dist_vuetify_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuetify/dist/vuetify.css */ "./node_modules/vuetify/dist/vuetify.css");
+/* harmony import */ var vuetify_dist_vuetify_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vuetify_dist_vuetify_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store */ "./resources/admin/js/store/index.js");
+/* harmony import */ var _pages_LoginPage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/LoginPage */ "./resources/admin/js/pages/LoginPage.vue");
+/* harmony import */ var _pages_Dashboard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/Dashboard */ "./resources/admin/js/pages/Dashboard.vue");
+/* harmony import */ var _pages_Models__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/Models */ "./resources/admin/js/pages/Models.vue");
+/* harmony import */ var _pages_Categories__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/Categories */ "./resources/admin/js/pages/Categories.vue");
+/* harmony import */ var _pages_Products__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/Products */ "./resources/admin/js/pages/Products.vue");
+/* harmony import */ var _layouts_AdminLayout__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./layouts/AdminLayout */ "./resources/admin/js/layouts/AdminLayout.vue");
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./App */ "./resources/admin/js/App.vue");
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
@@ -114506,8 +114506,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_2___default.a);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 
 
@@ -114521,14 +114521,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: [{
     path: '/admin/login',
     name: 'admin-login',
-    component: _pages_LoginPage__WEBPACK_IMPORTED_MODULE_4__["default"]
+    component: _pages_LoginPage__WEBPACK_IMPORTED_MODULE_5__["default"]
   }, {
     path: '/admin/',
     name: 'admin',
-    component: _layouts_AdminLayout__WEBPACK_IMPORTED_MODULE_9__["default"],
+    component: _layouts_AdminLayout__WEBPACK_IMPORTED_MODULE_10__["default"],
     children: [{
       path: 'dashboard',
-      component: _pages_Dashboard__WEBPACK_IMPORTED_MODULE_5__["default"],
+      component: _pages_Dashboard__WEBPACK_IMPORTED_MODULE_6__["default"],
       name: 'admin.dashboard',
       meta: {
         name: 'Главная',
@@ -114536,7 +114536,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: 'products',
-      component: _pages_Products__WEBPACK_IMPORTED_MODULE_8__["default"],
+      component: _pages_Products__WEBPACK_IMPORTED_MODULE_9__["default"],
       name: 'admin.products',
       meta: {
         name: 'Продукты',
@@ -114544,7 +114544,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: 'models',
-      component: _pages_Models__WEBPACK_IMPORTED_MODULE_6__["default"],
+      component: _pages_Models__WEBPACK_IMPORTED_MODULE_7__["default"],
       name: 'admin.models',
       meta: {
         name: 'Модели',
@@ -114552,7 +114552,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: 'categories',
-      component: _pages_Categories__WEBPACK_IMPORTED_MODULE_7__["default"],
+      component: _pages_Categories__WEBPACK_IMPORTED_MODULE_8__["default"],
       name: 'admin.categories',
       meta: {
         name: 'Категории',
@@ -114568,7 +114568,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     return h(_App__WEBPACK_IMPORTED_MODULE_11__["default"]);
   },
   router: router,
-  store: _store__WEBPACK_IMPORTED_MODULE_3__["default"]
+  store: _store__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 
 /***/ }),

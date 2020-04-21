@@ -45,6 +45,8 @@ import VueRouter from "vue-router";
 import Vuetify   from "vuetify";
 
 Vue.use(Vuetify);
+import 'vuetify/dist/vuetify.css';
+
 Vue.use(VueRouter);
 import store from './store';
 
@@ -56,7 +58,6 @@ import Products from './pages/Products';
 
 import AdminLayout from "./layouts/AdminLayout";
 
-import 'vuetify/dist/vuetify.css';
 
 import App from './App';
 

@@ -37,3 +37,4 @@ Route::get('{adminModel}/delete/{nId}', [
     'as'   => 'admin.model.delete',
     'uses' => 'AdminController@postDelete',
 ]);
+

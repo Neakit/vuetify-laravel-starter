@@ -11,11 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('get-record/{id}', [
+    'uses' => 'HomeController@getRecord'
+]);
+//
+Route::get('get-records/products', [
+    'uses' => 'HomeController@getRecords'
+]);
+//
+Route::get('/{any}', function(){
+    return view('client.app');
+})->where('any', '.*');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 

@@ -85,8 +85,8 @@ class AdminModelService
      * @param Request $request
      * @return array
      */
-    public function getRecords(Request $request) {
-
+    public function getRecords(Request $request)
+    {
         return ($this->dbModel) ? $this->oModel->getRecordsWithParams($request->all()) : [];
     }
 
